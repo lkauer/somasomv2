@@ -2,10 +2,24 @@
 
 {% block content %}
     <h1>Cadastrar Lançamento</h1>
-    <form method="post" enctype="multipart/form-data">
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" id="lancamentoForm">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Salvar</button>
+        <button type="submit" id="submitBtn">Salvar</button>
     </form>
     <a href="{% url 'listar_lancamentos' %}">Voltar</a>
+
+    <script>
+        document.getElementById('lancamentoForm').addEventListener('submit', function() {
+            document.getElementById('submitBtn').disabled = true;
+        });
+    </script>
 {% endblock %}

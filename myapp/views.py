@@ -31,6 +31,7 @@ def editar_artista(request, pk):
             artista = form.save(commit=False)
             artista.usuario = request.user
             artista.save()
+            messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
     else:
         form = ArtistaForm(instance=artista)
@@ -45,6 +46,7 @@ def editar_lancamento(request, pk):
             lancamento = form.save(commit=False)
             lancamento.usuario = request.user
             lancamento.save()
+            messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
     else:
         form = LancamentoForm(instance=lancamento)
@@ -78,6 +80,7 @@ def cadastrar_lancamento(request):
             lancamento = form.save(commit=False)
             lancamento.usuario = request.user
             lancamento.save()
+            messages.success(request, 'Lancamento cadastrado com sucesso.')
             return redirect('listar_lancamentos')
     else:
         form = LancamentoForm(user=request.user)
