@@ -38,6 +38,20 @@ def editar_artista(request, pk):
     return render(request, 'myapp/editar_artista.html', {'form': form})
 
 @login_required(login_url='/')
+def cadastrar_lancamento(request):
+    if request.method == 'POST':
+        form = LancamentoForm(request.POST, request.FILES, user=request.user)
+        if form.is_valid():
+            lancamento = form.save(commit=False)
+            lancamento.usuario = request.user
+            lancamento.save()
+            messages.success(request, 'Lancamento cadastrado com sucesso.')
+            return redirect('listar_lancamentos')
+    else:
+        form = LancamentoForm(user=request.user)
+
+    return render(request, 'myapp/cadastrar_lancamento.html', {'form': form})
+@login_required(login_url='/')
 def editar_lancamento(request, pk):
     lancamento = get_object_or_404(Lancamento, pk=pk, usuario=request.user)
     if request.method == 'POST':
@@ -49,7 +63,7 @@ def editar_lancamento(request, pk):
             messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
     else:
-        form = LancamentoForm(instance=lancamento)
+        form = LancamentoForm(instance=lancamento, user=request.user)
     return render(request, 'myapp/editar_lancamento.html', {'form': form})
 
 @login_required(login_url='/')
@@ -71,22 +85,6 @@ def excluir_lancamento(request, pk):
 def listar_artistas(request):
     artistas = Artista.objects.all()
     return render(request, 'myapp/listar_artistas.html', {'artistas': artistas})
-
-@login_required(login_url='/')
-def cadastrar_lancamento(request):
-    if request.method == 'POST':
-        form = LancamentoForm(request.POST, request.FILES, user=request.user)
-        if form.is_valid():
-            lancamento = form.save(commit=False)
-            lancamento.usuario = request.user
-            lancamento.save()
-            messages.success(request, 'Lancamento cadastrado com sucesso.')
-            return redirect('listar_lancamentos')
-    else:
-        form = LancamentoForm(user=request.user)
-
-    return render(request, 'myapp/cadastrar_lancamento.html', {'form': form})
-
 
 def listar_lancamentos(request):
     lancamentos = Lancamento.objects.all()
