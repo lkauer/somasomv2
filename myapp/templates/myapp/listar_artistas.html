@@ -1,0 +1,17 @@
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+    <h1>Lista de Artistas</h1>
+    <ul>
+        {% for artista in artistas %}
+            <li>
+                {% if artista.imagem_perfil %}
+                    <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" style="width:100px;height:100px;">
+                {% endif %}
+                {{ artista.nome }}
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

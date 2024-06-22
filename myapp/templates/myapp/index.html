@@ -1,0 +1,23 @@
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+        <div class="container">
+        <h1>Som a Som</h1>
+        <p>Esta é a página inicial do seu site. Use o menu acima para navegar entre as seções.</p>
+
+        <section id="artistas">
+            <h2>Artistas</h2>
+            <a href="/listar_artistas">
+                <img src="https://via.placeholder.com/1200x300" alt="Painel de Artistas" class="panel">
+            </a>
+        </section>
+
+        <section id="lancamentos">
+            <h2>Lançamentos</h2>
+            <a href="/listar_lancamentos">
+                <img src="https://via.placeholder.com/1200x300" alt="Painel de Lançamentos" class="panel">
+            </a>
+        </section>
+    </div>
+
+{% endblock %}

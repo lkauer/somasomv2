@@ -1,0 +1,14 @@
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+
+    <h1>Excluir Artista</h1>
+    <p>Tem certeza que deseja excluir o artista {{ artista.nome }}?</p>
+    <p>Ao decidir excluir o artista, todos os lançamentos serão excluídos.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+        <a href="{% url 'painel_geral' %}">Cancelar</a>
+    </form>
+
+{% endblock %}
