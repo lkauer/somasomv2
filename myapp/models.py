@@ -25,7 +25,7 @@ User = get_user_model()
 class Artista(models.Model):
     nome = models.CharField(max_length=100)
     #usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     imagem_perfil = models.ImageField(upload_to='artistas/', blank=True, null=True)
 

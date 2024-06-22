@@ -5,18 +5,21 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 @login_required(login_url='/')
 def cadastrar_artista(request):
     if request.method == 'POST':
         form = ArtistaForm(request.POST, request.FILES)
         if form.is_valid():
-            artista = form.save(commit=False)  # Não salva ainda no banco de dados
-            artista.usuario = request.user  # Atribui o usuário logado ao campo usuario
-            artista.save()  # Agora salva no banco de dados
-            return redirect('painel_geral')
+            artista = form.save(commit=False)
+            artista.usuario = request.user  # Atribui o usuário logado ao artista
+            artista.save()
+            messages.success(request, 'Artista cadastrado com sucesso.')
+            return redirect('listar_artistas')  # Redireciona após o sucesso
     else:
         form = ArtistaForm()
+
     return render(request, 'myapp/cadastrar_artista.html', {'form': form})
 
 @login_required(login_url='/')

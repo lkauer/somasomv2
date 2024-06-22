@@ -1,12 +1,24 @@
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
-        <h1>Cadastrar Artista</h1>
-    <form method="post" enctype="multipart/form-data">
+    <h1>Cadastrar Artista</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" id="artistaForm">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Salvar</button>
+        <button type="submit" id="submitBtn">Salvar</button>
     </form>
     <a href="{% url 'listar_artistas' %}">Voltar</a>
 
+    <script>
+        document.getElementById('artistaForm').addEventListener('submit', function() {
+            document.getElementById('submitBtn').disabled = true;
+        });
+    </script>
 {% endblock %}
