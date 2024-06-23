@@ -4,7 +4,9 @@
 {% block content %}
     <h1>Detalhes do Lançamento</h1>
     <p><strong>Título:</strong> {{ lancamento.titulo }}</p>
-    <p><strong>Artista:</strong> {{ lancamento.artista.nome }}</p>
+    <!--<p><strong>Artista:</strong> {{ lancamento.artista.nome }}</p>-->
+    <p><strong>Artista:</strong> <a href="{% url 'visualizar_artista' lancamento.artista.pk %}">{{ lancamento.artista.nome }}</a></p>
+
     <p><strong>Data de Lançamento:</strong> {{ lancamento.data_lancamento }}</p>
     {% if lancamento.imagem_lancamento %}
         <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" style="width:100px;height:100px;">

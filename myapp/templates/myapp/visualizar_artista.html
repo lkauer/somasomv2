@@ -1,11 +1,37 @@
-<!-- myapp/templates/myapp/visualizar_artista.html -->
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
     <h1>Detalhes do Artista</h1>
     <p><strong>Nome:</strong> {{ artista.nome }}</p>
-    {% if artista.imagem_perfil %}
-        <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" style="width:100px;height:100px;">
-    {% endif %}
+    <p>
+        <strong>Imagem do Perfil:</strong>
+        {% if artista.imagem_perfil %}
+            <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" style="width:100px;height:100px;">
+        {% else %}
+            Não disponível
+        {% endif %}
+    </p>
+
+    <h2>Lançamentos</h2>
+    <ul>
+        {% for lancamento in lancamentos %}
+            <li>
+                <p><strong>Título:</strong> <a href="{% url 'visualizar_lancamento' lancamento.pk %}">{{ lancamento.titulo }}</a></p>
+                <p><strong>Data de Lançamento:</strong> {{ lancamento.data_lancamento }}</p>
+                {% if lancamento.imagem_lancamento %}
+                    <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" style="width:100px;height:100px;">
+                {% endif %}
+                {% if lancamento.audio %}
+                    <audio controls>
+                        <source src="{{ lancamento.audio.url }}" type="audio/{{ lancamento.audio.url|slice:"-3:" }}">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Nenhum lançamento disponível.</li>
+        {% endfor %}
+    </ul>
+
     <a href="{% url 'listar_artistas' %}">Voltar</a>
 {% endblock %}
