@@ -1,0 +1,19 @@
+<!-- myapp/templates/myapp/visualizar_lancamento.html -->
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+    <h1>Detalhes do Lançamento</h1>
+    <p><strong>Título:</strong> {{ lancamento.titulo }}</p>
+    <p><strong>Artista:</strong> {{ lancamento.artista.nome }}</p>
+    <p><strong>Data de Lançamento:</strong> {{ lancamento.data_lancamento }}</p>
+    {% if lancamento.imagem_lancamento %}
+        <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" style="width:100px;height:100px;">
+    {% endif %}
+    {% if lancamento.audio %}
+        <audio controls>
+            <source src="{{ lancamento.audio.url }}" type="audio/{{ lancamento.audio.url|slice:"-3:" }}">
+            Your browser does not support the audio element.
+        </audio>
+    {% endif %}
+    <a href="{% url 'listar_lancamentos' %}">Voltar</a>
+{% endblock %}

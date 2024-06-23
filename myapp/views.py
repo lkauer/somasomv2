@@ -113,3 +113,13 @@ def painel_geral(request):
     lancamentos = Lancamento.objects.filter(usuario=request.user)
 
     return render(request, 'myapp/painel.html', {'artistas': artistas, 'lancamentos': lancamentos})
+
+@login_required(login_url='/')
+def visualizar_artista(request, pk):
+    artista = get_object_or_404(Artista, pk=pk)
+    return render(request, 'myapp/visualizar_artista.html', {'artista': artista})
+
+@login_required(login_url='/')
+def visualizar_lancamento(request, pk):
+    lancamento = get_object_or_404(Lancamento, pk=pk)
+    return render(request, 'myapp/visualizar_lancamento.html', {'lancamento': lancamento})

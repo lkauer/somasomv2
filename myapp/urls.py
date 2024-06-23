@@ -12,4 +12,7 @@ urlpatterns = [
     path('cadastrar_lancamento/', views.cadastrar_lancamento, name='cadastrar_lancamento'),
     path('listar_lancamentos/', views.listar_lancamentos, name='listar_lancamentos'),
     path('painel_geral/', views.painel_geral, name='painel_geral'),
+    path('visualizar_artista/<int:pk>/', views.visualizar_artista, name='visualizar_artista'),
+    path('visualizar_lancamento/<int:pk>/', views.visualizar_lancamento, name='visualizar_lancamento'),
+
 ]

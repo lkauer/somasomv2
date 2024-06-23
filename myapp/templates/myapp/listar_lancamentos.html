@@ -1,7 +1,6 @@
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
-
     <h1>Lista de Lançamentos</h1>
     <ul>
         {% for lancamento in lancamentos %}
@@ -9,15 +8,8 @@
                 {% if lancamento.imagem_lancamento %}
                     <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" style="width:100px;height:100px;">
                 {% endif %}
-                {{ lancamento.titulo }} - {{ lancamento.artista.nome }} - {{ lancamento.data_lancamento }}
-                {% if lancamento.audio %}
-                    <audio controls>
-                        <source src="{{ lancamento.audio.url }}" type="audio/{{ lancamento.audio.url|slice:"-3:" }}">
-                        Your browser does not support the audio element.
-                    </audio>
-                {% endif %}
+                <a href="{% url 'visualizar_lancamento' lancamento.pk %}">{{ lancamento.titulo }}</a> - {{ lancamento.artista.nome }} - {{ lancamento.data_lancamento }}
             </li>
         {% endfor %}
     </ul>
-
 {% endblock %}

@@ -8,10 +8,8 @@
                 {% if artista.imagem_perfil %}
                     <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" style="width:100px;height:100px;">
                 {% endif %}
-                {{ artista.nome }}
+                <a href="{% url 'visualizar_artista' artista.pk %}">{{ artista.nome }}</a>
             </li>
         {% endfor %}
     </ul>
-
-
 {% endblock %}

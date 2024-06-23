@@ -1,0 +1,11 @@
+<!-- myapp/templates/myapp/visualizar_artista.html -->
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+    <h1>Detalhes do Artista</h1>
+    <p><strong>Nome:</strong> {{ artista.nome }}</p>
+    {% if artista.imagem_perfil %}
+        <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" style="width:100px;height:100px;">
+    {% endif %}
+    <a href="{% url 'listar_artistas' %}">Voltar</a>
+{% endblock %}
