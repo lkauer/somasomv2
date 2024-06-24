@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Som a Som</title>
-    <style>
+        <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .navbar {
             background-color: #333;
@@ -29,6 +32,7 @@
         }
         .container {
             padding: 20px;
+            flex: 1;
         }
         h1, h2 {
             color: #333;
@@ -38,6 +42,45 @@
             margin: 20px 0;
             border-radius: 8px;
         }
+        .footer {
+            background-color: #333;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .footer a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #ddd;
+        }
+
+        .pagination {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .step-links a, .step-links span {
+            margin: 0 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .step-links a:hover {
+            background-color: #ddd;
+        }
+
+        .step-links .current {
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -59,6 +102,10 @@
 
     <div id="content" class="container">
         {% block content %}{% endblock %}
+    </div>
+
+        <div class="footer">
+        <p>&copy; 2024 Som a Som. Todos os direitos reservados. | <a href="{% url 'manifesto' %}">Nosso Manifesto</a></p>
     </div>
 </body>
 </html>

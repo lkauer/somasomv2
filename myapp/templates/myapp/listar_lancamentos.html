@@ -1,3 +1,4 @@
+<!-- myapp/templates/myapp/listar_lancamentos.html -->
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
@@ -8,8 +9,27 @@
                 {% if lancamento.imagem_lancamento %}
                     <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" style="width:100px;height:100px;">
                 {% endif %}
-                <a href="{% url 'visualizar_lancamento' lancamento.pk %}">{{ lancamento.titulo }}</a> - {{ lancamento.artista.nome }} - {{ lancamento.data_lancamento }}
+                <a href="{% url 'visualizar_lancamento' lancamento.pk %}">{{ lancamento.titulo }}</a>
             </li>
         {% endfor %}
     </ul>
+
+    <!-- Navegação de paginação -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if lancamentos.has_previous %}
+                <a href="?page=1">&laquo; primeira</a>
+                <a href="?page={{ lancamentos.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ lancamentos.number }} de {{ lancamentos.paginator.num_pages }}.
+            </span>
+
+            {% if lancamentos.has_next %}
+                <a href="?page={{ lancamentos.next_page_number }}">próxima</a>
+                <a href="?page={{ lancamentos.paginator.num_pages }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}

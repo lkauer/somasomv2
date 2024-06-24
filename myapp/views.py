@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @login_required(login_url='/')
 def cadastrar_artista(request):
@@ -16,7 +17,7 @@ def cadastrar_artista(request):
             artista.usuario = request.user  # Atribui o usuário logado ao artista
             artista.save()
             messages.success(request, 'Artista cadastrado com sucesso.')
-            return redirect('listar_artistas')  # Redireciona após o sucesso
+            return redirect('painel_geral')  # Redireciona após o sucesso
     else:
         form = ArtistaForm()
 
@@ -46,11 +47,12 @@ def cadastrar_lancamento(request):
             lancamento.usuario = request.user
             lancamento.save()
             messages.success(request, 'Lancamento cadastrado com sucesso.')
-            return redirect('listar_lancamentos')
+            return redirect('painel_geral')
     else:
         form = LancamentoForm(user=request.user)
 
     return render(request, 'myapp/cadastrar_lancamento.html', {'form': form})
+
 @login_required(login_url='/')
 def editar_lancamento(request, pk):
     lancamento = get_object_or_404(Lancamento, pk=pk, usuario=request.user)
@@ -83,11 +85,35 @@ def excluir_lancamento(request, pk):
     return render(request, 'myapp/confirmar_exclusao_lancamento.html', {'lancamento': lancamento})
 
 def listar_artistas(request):
-    artistas = Artista.objects.all()
+    artista_list = Artista.objects.all()
+    paginator = Paginator(artista_list, 10)  # Mostra 10 artistas por página
+
+    page = request.GET.get('page')
+    try:
+        artistas = paginator.page(page)
+    except PageNotAnInteger:
+        # Se a página não for um inteiro, mostra a primeira página
+        artistas = paginator.page(1)
+    except EmptyPage:
+        # Se a página estiver fora do intervalo, mostra a última página
+        artistas = paginator.page(paginator.num_pages)
+
     return render(request, 'myapp/listar_artistas.html', {'artistas': artistas})
 
 def listar_lancamentos(request):
-    lancamentos = Lancamento.objects.all()
+    lancamento_list = Lancamento.objects.all()
+    paginator = Paginator(lancamento_list, 10)  # Mostra 10 lançamentos por página
+
+    page = request.GET.get('page')
+    try:
+        lancamentos = paginator.page(page)
+    except PageNotAnInteger:
+        # Se a página não for um inteiro, mostra a primeira página
+        lancamentos = paginator.page(1)
+    except EmptyPage:
+        # Se a página estiver fora do intervalo, mostra a última página
+        lancamentos = paginator.page(paginator.num_pages)
+
     return render(request, 'myapp/listar_lancamentos.html', {'lancamentos': lancamentos})
 
 def signup(request):
@@ -123,3 +149,7 @@ def visualizar_artista(request, pk):
 def visualizar_lancamento(request, pk):
     lancamento = get_object_or_404(Lancamento, pk=pk)
     return render(request, 'myapp/visualizar_lancamento.html', {'lancamento': lancamento})
+
+def manifesto(request):
+
+    return render(request, 'myapp/manifesto.html')
