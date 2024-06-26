@@ -11,6 +11,8 @@
                 {% endif %}
                 <a href="{% url 'visualizar_lancamento' lancamento.pk %}">{{ lancamento.titulo }}</a>
             </li>
+        {% empty %}
+            <li>Nenhum lançamento encontrado.</li>
         {% endfor %}
     </ul>
 

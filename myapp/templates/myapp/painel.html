@@ -1,15 +1,13 @@
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
-
-
     <h2>Painel</h2>
-    <p>Seu ID de usuário é: {{ user.id }}</p>
 
     <a href="{% url 'cadastrar_artista' %}">Cadastrar Novo Artista</a>
     <a href="{% url 'cadastrar_lancamento' %}">Cadastrar Novo Lançamento</a>
 
     <h2>Meus artistas:</h2>
+    <ul>
         {% for artista in artistas %}
             <li>
                 {% if artista.imagem_perfil %}
@@ -18,12 +16,14 @@
                 {{ artista.nome }}
                 <a href="{% url 'editar_artista' artista.pk %}">Editar</a>
                 <a href="{% url 'excluir_artista' artista.pk %}">Excluir</a>  <!-- Link para confirmação de exclusão -->
-
             </li>
+        {% empty %}
+            <li>Nenhum artista encontrado.</li>
         {% endfor %}
+    </ul>
 
     <h2>Meus lançamentos:</h2>
-        <ul>
+    <ul>
         {% for lancamento in lancamentos %}
             <li>
                 <strong>{{ lancamento.titulo }}</strong>
@@ -33,8 +33,9 @@
                 {% endif %}
                 <a href="{% url 'editar_lancamento' pk=lancamento.pk %}">Editar Lançamento</a>
                 <a href="{% url 'excluir_lancamento' pk=lancamento.pk %}">Excluir Lançamento</a>
-
             </li>
+        {% empty %}
+            <li>Nenhum lançamento encontrado.</li>
         {% endfor %}
     </ul>
 {% endblock %}

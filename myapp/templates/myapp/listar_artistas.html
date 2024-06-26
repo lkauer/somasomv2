@@ -10,6 +10,8 @@
                 {% endif %}
                 <a href="{% url 'visualizar_artista' artista.pk %}">{{ artista.nome }}</a>
             </li>
+        {% empty %}
+            <li>Nenhum artista encontrado.</li>
         {% endfor %}
     </ul>
 

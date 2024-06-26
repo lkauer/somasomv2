@@ -1,0 +1,10 @@
+<!-- myapp/templates/myapp/registro_nao_encontrado.html -->
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+    <div class="alert alert-danger">
+        <h1>Erro</h1>
+        <p>{{ mensagem }}</p>
+        <a href="{% url 'index' %}" class="btn btn-primary">Voltar</a>
+    </div>
+{% endblock %}
