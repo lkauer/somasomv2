@@ -22,7 +22,7 @@ class ArtistaForm(forms.ModelForm):
 class LancamentoForm(forms.ModelForm):
     class Meta:
         model = Lancamento
-        fields = ['titulo', 'artista', 'data_lancamento', 'imagem_lancamento', 'audio']
+        fields = ['titulo', 'artista', 'imagem_lancamento', 'audio']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)

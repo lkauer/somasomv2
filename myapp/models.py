@@ -34,7 +34,6 @@ class Artista(models.Model):
 
 class Lancamento(models.Model):
     titulo = models.CharField(max_length=200)
-    data_lancamento = models.DateField()
     imagem_lancamento = models.ImageField(upload_to='lancamentos/', blank=True, null=True)
     audio = models.FileField(upload_to='audios/', validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav'])], blank=True, null=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)

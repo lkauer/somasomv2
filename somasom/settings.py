@@ -124,11 +124,14 @@ STATIC_URL = '/static/'
 # see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = '/home/lucaskauer/somasom/static'
-STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = 'painel_geral'
-LOGOUT_REDIRECT_URL = 'login'
-AUTH_USER_MODEL = 'myapp.CustomUser'
+
+# STATIC_ROOT is the directory where `collectstatic` will gather all static files.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+LOGIN_REDIRECT_URL = 'painel_geral'
+LOGOUT_REDIRECT_URL = 'login'
+AUTH_USER_MODEL = 'myapp.CustomUser'
