@@ -88,13 +88,13 @@
         <div class="navbar">
             <a href="/">Inicio</a>
             <a href="/listar_artistas">Artistas</a>
-            <a href="/listar_lancamentos">Lançamentos</a>
+            <a href="/listar_lancamentos">Sons</a>
             {% if user.is_authenticated %}
-                <a href="/painel_geral">Acessar</a>
-                <a class="waves-effect waves-light btn" href="{% url 'logout' %}">Log out</a>
+                <a href="/painel_geral">Painel</a>
+                <a class="waves-effect waves-light btn" href="{% url 'logout' %}">Sair</a>
             {% else %}
-                <a href="/login">Login</a>
-                <a href="/signup">Sign up</a>
+                <a href="/login">Acessar</a>
+                <a href="/signup">Cadastrar</a>
             {% endif %}
 
         </div>

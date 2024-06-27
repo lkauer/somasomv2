@@ -7,6 +7,8 @@ from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import os
+from django.conf import settings
 
 def index(request):
     return render(request, 'myapp/index.html')
@@ -121,17 +123,25 @@ def signup(request):
 
 @login_required(login_url='/')
 def editar_artista(request, pk):
-
     try:
         artista = Artista.objects.get(pk=pk, usuario=request.user)
     except Artista.DoesNotExist:
         return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Artista não encontrado.'})
 
+    imagem_anterior = artista.imagem_perfil.path if artista.imagem_perfil else None  # Armazena o caminho da imagem anterior
+
     if request.method == 'POST':
-        form = ArtistaForm(request.POST, request.FILES, instance=artista)  # Adicione request.FILES aqui
+        form = ArtistaForm(request.POST, request.FILES, instance=artista)
         if form.is_valid():
             artista = form.save(commit=False)
             artista.usuario = request.user
+
+            # Verifica se o campo de imagem foi limpo
+            if 'imagem_perfil-clear' in request.POST and imagem_anterior:
+                if os.path.isfile(imagem_anterior):
+                    os.remove(imagem_anterior)
+                artista.imagem_perfil = None
+
             artista.save()
             messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
@@ -141,17 +151,32 @@ def editar_artista(request, pk):
 
 @login_required(login_url='/')
 def editar_lancamento(request, pk):
-
     try:
         lancamento = Lancamento.objects.get(pk=pk, usuario=request.user)
     except Lancamento.DoesNotExist:
         return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Lancamento não encontrado.'})
 
+    imagem_anterior = lancamento.imagem_lancamento.path if lancamento.imagem_lancamento else None  # Armazena o caminho da imagem anterior
+    audio_anterior = lancamento.audio.path if lancamento.audio else None  # Armazena o caminho do áudio anterior
+
     if request.method == 'POST':
-        form = LancamentoForm(request.POST, request.FILES, instance=lancamento)  # Adicione request.FILES aqui
+        form = LancamentoForm(request.POST, request.FILES, instance=lancamento, user=request.user)
         if form.is_valid():
             lancamento = form.save(commit=False)
             lancamento.usuario = request.user
+
+            # Verifica se o campo de imagem foi limpo
+            if 'imagem_lancamento-clear' in request.POST and imagem_anterior:
+                if os.path.isfile(imagem_anterior):
+                    os.remove(imagem_anterior)
+                lancamento.imagem_lancamento = None
+
+            # Verifica se o campo de áudio foi limpo
+            if 'audio-clear' in request.POST and audio_anterior:
+                if os.path.isfile(audio_anterior):
+                    os.remove(audio_anterior)
+                lancamento.audio = None
+
             lancamento.save()
             messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
@@ -167,8 +192,14 @@ def excluir_artista(request, pk):
         return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Artista não encontrado.'})
 
     if request.method == 'POST':
+        # Remove o arquivo de imagem do servidor se existir
+        if artista.imagem_perfil:
+            if os.path.isfile(artista.imagem_perfil.path):
+                os.remove(artista.imagem_perfil.path)
+
         artista.delete()
         return redirect('painel_geral')
+
     return render(request, 'myapp/confirmar_exclusao.html', {'artista': artista})
 
 @login_required(login_url='/')
@@ -176,9 +207,20 @@ def excluir_lancamento(request, pk):
     try:
         lancamento = Lancamento.objects.get(pk=pk, usuario=request.user)
     except Lancamento.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Lancamento não encontrado.'})
+        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Lançamento não encontrado.'})
 
     if request.method == 'POST':
+        # Remove o arquivo de imagem do servidor se existir
+        if lancamento.imagem_lancamento:
+            if os.path.isfile(lancamento.imagem_lancamento.path):
+                os.remove(lancamento.imagem_lancamento.path)
+
+        # Remove o arquivo de áudio do servidor se existir
+        if lancamento.audio:
+            if os.path.isfile(lancamento.audio.path):
+                os.remove(lancamento.audio.path)
+
         lancamento.delete()
         return redirect('painel_geral')
+
     return render(request, 'myapp/confirmar_exclusao_lancamento.html', {'lancamento': lancamento})

@@ -1,10 +1,8 @@
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
-
-
     <h1>Editar Lançamento</h1>
-        {% if messages %}
+    {% if messages %}
         <ul>
             {% for message in messages %}
                 <li>{{ message }}</li>
@@ -12,14 +10,14 @@
         </ul>
     {% endif %}
 
-    <form method="post" enctype="multipart/form-data" id="lancamentoForm">  <!-- Adicione enctype="multipart/form-data" -->
+    <form method="post" enctype="multipart/form-data" id="lancamentoForm">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" id="submitBtn">Salvar</button>
     </form>
     <a href="{% url 'listar_lancamentos' %}">Voltar</a>
 
-        <script>
+    <script>
         document.getElementById('lancamentoForm').addEventListener('submit', function() {
             document.getElementById('submitBtn').disabled = true;
         });
