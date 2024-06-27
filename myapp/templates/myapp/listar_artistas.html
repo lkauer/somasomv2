@@ -1,19 +1,17 @@
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
-    <h1>Lista de Artistas</h1>
-    <ul>
+    <h1>Artistas</h1>
+    <div class="artist-gallery">
         {% for artista in artistas %}
-            <li>
+            <div class="artist-item">
                 {% if artista.imagem_perfil %}
-                    <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" style="width:100px;height:100px;">
+                    <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
                 {% endif %}
-                <a href="{% url 'visualizar_artista' artista.pk %}">{{ artista.nome }}</a>
-            </li>
-        {% empty %}
-            <li>Nenhum artista encontrado.</li>
+                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 
     <!-- Navegação de paginação -->
     <div class="pagination">

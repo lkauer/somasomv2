@@ -7,35 +7,33 @@
     <a href="{% url 'cadastrar_lancamento' %}">Cadastrar Novo Lançamento</a>
 
     <h2>Meus artistas:</h2>
-    <ul>
+    <div class="artist-gallery">
         {% for artista in artistas %}
-            <li>
+            <div class="artist-item">
                 {% if artista.imagem_perfil %}
-                    <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" style="width:100px;height:100px;">
+                    <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
                 {% endif %}
-                {{ artista.nome }}
                 <a href="{% url 'editar_artista' artista.pk %}">Editar</a>
                 <a href="{% url 'excluir_artista' artista.pk %}">Excluir</a>  <!-- Link para confirmação de exclusão -->
-            </li>
+            </div>
         {% empty %}
             <li>Nenhum artista encontrado.</li>
         {% endfor %}
-    </ul>
+    </div>
+
 
     <h2>Meus lançamentos:</h2>
-    <ul>
-        {% for lancamento in lancamentos %}
-            <li>
-                <strong>{{ lancamento.titulo }}</strong>
-                <p>Data de Lançamento: {{ lancamento.data_lancamento }}</p>
-                {% if lancamento.imagem_lancamento %}
-                    <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" style="width:100px;height:100px;">
-                {% endif %}
-                <a href="{% url 'editar_lancamento' pk=lancamento.pk %}">Editar Lançamento</a>
-                <a href="{% url 'excluir_lancamento' pk=lancamento.pk %}">Excluir Lançamento</a>
-            </li>
+    <div class="sound-gallery">
+    {% for lancamento in lancamentos %}
+        <div class="sound-item">
+            {% if lancamento.imagem_lancamento %}
+                <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" class="sound-image">
+            {% endif %}
+            <a href="{% url 'editar_lancamento' pk=lancamento.pk %}">Editar Lançamento</a>
+            <a href="{% url 'excluir_lancamento' pk=lancamento.pk %}">Excluir Lançamento</a>
+        </div>
         {% empty %}
             <li>Nenhum lançamento encontrado.</li>
         {% endfor %}
-    </ul>
+</div>
 {% endblock %}
