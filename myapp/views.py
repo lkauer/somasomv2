@@ -1,6 +1,5 @@
-# myapp/views.py
-from .forms import ArtistaForm, LancamentoForm
-from .models import Artista, Lancamento
+from .forms import ArtistaForm, SomForm
+from .models import Artista, Som
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
@@ -14,35 +13,31 @@ def index(request):
     return render(request, 'myapp/index.html')
 
 def manifesto(request):
-
     return render(request, 'myapp/manifesto.html')
 
-@login_required(login_url='/')
-def visualizar_lancamento(request, pk):
+def visualizar_som(request, pk):
     try:
-        lancamento = Lancamento.objects.get(pk=pk)
-    except Lancamento.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Lançamento não encontrado.'})
+        som = Som.objects.get(pk=pk)
+    except Som.DoesNotExist:
+        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Som não encontrado.'})
 
-    return render(request, 'myapp/visualizar_lancamento.html', {'lancamento': lancamento})
+    return render(request, 'myapp/visualizar_som.html', {'som': som})
 
 def visualizar_artista(request, pk):
-
     try:
         artista = Artista.objects.get(pk=pk)
-        lancamentos = Lancamento.objects.filter(artista=artista)
+        sons = Som.objects.filter(artista=artista)
     except Artista.DoesNotExist:
         return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Artista não encontrado.'})
 
-    return render(request, 'myapp/visualizar_artista.html', {'artista': artista, 'lancamentos': lancamentos})
+    return render(request, 'myapp/visualizar_artista.html', {'artista': artista, 'sons': sons})
 
 @login_required(login_url='/')
 def painel_geral(request):
-
     artistas = Artista.objects.filter(usuario=request.user)
-    lancamentos = Lancamento.objects.filter(usuario=request.user)
+    sons = Som.objects.filter(usuario=request.user)
 
-    return render(request, 'myapp/painel.html', {'artistas': artistas, 'lancamentos': lancamentos})
+    return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons})
 
 @login_required(login_url='/')
 def cadastrar_artista(request):
@@ -60,19 +55,19 @@ def cadastrar_artista(request):
     return render(request, 'myapp/cadastrar_artista.html', {'form': form})
 
 @login_required(login_url='/')
-def cadastrar_lancamento(request):
+def cadastrar_som(request):
     if request.method == 'POST':
-        form = LancamentoForm(request.POST, request.FILES, user=request.user)
+        form = SomForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
-            lancamento = form.save(commit=False)
-            lancamento.usuario = request.user
-            lancamento.save()
-            messages.success(request, 'Lancamento cadastrado com sucesso.')
+            som = form.save(commit=False)
+            som.usuario = request.user
+            som.save()
+            messages.success(request, 'Som cadastrado com sucesso.')
             return redirect('painel_geral')
     else:
-        form = LancamentoForm(user=request.user)
+        form = SomForm(user=request.user)
 
-    return render(request, 'myapp/cadastrar_lancamento.html', {'form': form})
+    return render(request, 'myapp/cadastrar_som.html', {'form': form})
 
 def listar_artistas(request):
     artista_list = Artista.objects.all()
@@ -90,21 +85,21 @@ def listar_artistas(request):
 
     return render(request, 'myapp/listar_artistas.html', {'artistas': artistas})
 
-def listar_lancamentos(request):
-    lancamento_list = Lancamento.objects.all()
-    paginator = Paginator(lancamento_list, 10)  # Mostra 10 lançamentos por página
+def listar_sons(request):
+    som_list = Som.objects.all()
+    paginator = Paginator(som_list, 10)  # Mostra 10 sons por página
 
     page = request.GET.get('page')
     try:
-        lancamentos = paginator.page(page)
+        sons = paginator.page(page)
     except PageNotAnInteger:
         # Se a página não for um inteiro, mostra a primeira página
-        lancamentos = paginator.page(1)
+        sons = paginator.page(1)
     except EmptyPage:
         # Se a página estiver fora do intervalo, mostra a última página
-        lancamentos = paginator.page(paginator.num_pages)
+        sons = paginator.page(paginator.num_pages)
 
-    return render(request, 'myapp/listar_lancamentos.html', {'lancamentos': lancamentos})
+    return render(request, 'myapp/listar_sons.html', {'sons': sons})
 
 def signup(request):
     if request.method == 'POST':
@@ -119,7 +114,6 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'myapp/signup.html', {'form': form})
-
 
 @login_required(login_url='/')
 def editar_artista(request, pk):
@@ -150,39 +144,39 @@ def editar_artista(request, pk):
     return render(request, 'myapp/editar_artista.html', {'form': form})
 
 @login_required(login_url='/')
-def editar_lancamento(request, pk):
+def editar_som(request, pk):
     try:
-        lancamento = Lancamento.objects.get(pk=pk, usuario=request.user)
-    except Lancamento.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Lancamento não encontrado.'})
+        som = Som.objects.get(pk=pk, usuario=request.user)
+    except Som.DoesNotExist:
+        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Som não encontrado.'})
 
-    imagem_anterior = lancamento.imagem_lancamento.path if lancamento.imagem_lancamento else None  # Armazena o caminho da imagem anterior
-    audio_anterior = lancamento.audio.path if lancamento.audio else None  # Armazena o caminho do áudio anterior
+    imagem_anterior = som.imagem_som.path if som.imagem_som else None  # Armazena o caminho da imagem anterior
+    audio_anterior = som.audio.path if som.audio else None  # Armazena o caminho do áudio anterior
 
     if request.method == 'POST':
-        form = LancamentoForm(request.POST, request.FILES, instance=lancamento, user=request.user)
+        form = SomForm(request.POST, request.FILES, instance=som, user=request.user)
         if form.is_valid():
-            lancamento = form.save(commit=False)
-            lancamento.usuario = request.user
+            som = form.save(commit=False)
+            som.usuario = request.user
 
             # Verifica se o campo de imagem foi limpo
-            if 'imagem_lancamento-clear' in request.POST and imagem_anterior:
+            if 'imagem_som-clear' in request.POST and imagem_anterior:
                 if os.path.isfile(imagem_anterior):
                     os.remove(imagem_anterior)
-                lancamento.imagem_lancamento = None
+                som.imagem_som = None
 
             # Verifica se o campo de áudio foi limpo
             if 'audio-clear' in request.POST and audio_anterior:
                 if os.path.isfile(audio_anterior):
                     os.remove(audio_anterior)
-                lancamento.audio = None
+                som.audio = None
 
-            lancamento.save()
+            som.save()
             messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
     else:
-        form = LancamentoForm(instance=lancamento, user=request.user)
-    return render(request, 'myapp/editar_lancamento.html', {'form': form})
+        form = SomForm(instance=som, user=request.user)
+    return render(request, 'myapp/editar_som.html', {'form': form})
 
 @login_required(login_url='/')
 def excluir_artista(request, pk):
@@ -203,24 +197,24 @@ def excluir_artista(request, pk):
     return render(request, 'myapp/confirmar_exclusao.html', {'artista': artista})
 
 @login_required(login_url='/')
-def excluir_lancamento(request, pk):
+def excluir_som(request, pk):
     try:
-        lancamento = Lancamento.objects.get(pk=pk, usuario=request.user)
-    except Lancamento.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Lançamento não encontrado.'})
+        som = Som.objects.get(pk=pk, usuario=request.user)
+    except Som.DoesNotExist:
+        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Som não encontrado.'})
 
     if request.method == 'POST':
         # Remove o arquivo de imagem do servidor se existir
-        if lancamento.imagem_lancamento:
-            if os.path.isfile(lancamento.imagem_lancamento.path):
-                os.remove(lancamento.imagem_lancamento.path)
+        if som.imagem_som:
+            if os.path.isfile(som.imagem_som.path):
+                os.remove(som.imagem_som.path)
 
         # Remove o arquivo de áudio do servidor se existir
-        if lancamento.audio:
-            if os.path.isfile(lancamento.audio.path):
-                os.remove(lancamento.audio.path)
+        if som.audio:
+            if os.path.isfile(som.audio.path):
+                os.remove(som.audio.path)
 
-        lancamento.delete()
+        som.delete()
         return redirect('painel_geral')
 
-    return render(request, 'myapp/confirmar_exclusao_lancamento.html', {'lancamento': lancamento})
+    return render(request, 'myapp/confirmar_exclusao_som.html', {'som': som})

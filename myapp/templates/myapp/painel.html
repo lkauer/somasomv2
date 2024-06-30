@@ -4,7 +4,7 @@
     <h2>Painel</h2>
 
     <a href="{% url 'cadastrar_artista' %}">Cadastrar Novo Artista</a>
-    <a href="{% url 'cadastrar_lancamento' %}">Cadastrar Novo Lançamento</a>
+    <a href="{% url 'cadastrar_som' %}">Cadastrar Novo Som</a>
 
     <h2>Meus artistas:</h2>
     <div class="artist-gallery">
@@ -13,6 +13,7 @@
                 {% if artista.imagem_perfil %}
                     <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
                 {% endif %}
+                <p class="artist-name">{{ artista.nome }}</p>
                 <a href="{% url 'editar_artista' artista.pk %}">Editar</a>
                 <a href="{% url 'excluir_artista' artista.pk %}">Excluir</a>  <!-- Link para confirmação de exclusão -->
             </div>
@@ -22,18 +23,19 @@
     </div>
 
 
-    <h2>Meus lançamentos:</h2>
+    <h2>Meus sons:</h2>
     <div class="sound-gallery">
-    {% for lancamento in lancamentos %}
+    {% for som in sons %}
         <div class="sound-item">
-            {% if lancamento.imagem_lancamento %}
-                <img src="{{ lancamento.imagem_lancamento.url }}" alt="{{ lancamento.titulo }}" class="sound-image">
+            {% if som.imagem_som %}
+                <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
             {% endif %}
-            <a href="{% url 'editar_lancamento' pk=lancamento.pk %}">Editar Lançamento</a>
-            <a href="{% url 'excluir_lancamento' pk=lancamento.pk %}">Excluir Lançamento</a>
+            <p class="sound-name">{{ som.titulo }}</p>
+            <a href="{% url 'editar_som' pk=som.pk %}">Editar Som</a>
+            <a href="{% url 'excluir_som' pk=som.pk %}">Excluir Som</a>
         </div>
         {% empty %}
-            <li>Nenhum lançamento encontrado.</li>
+            <li>Nenhum Som encontrado.</li>
         {% endfor %}
 </div>
 {% endblock %}

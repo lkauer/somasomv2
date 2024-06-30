@@ -1,0 +1,34 @@
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+    <h1>Sons</h1>
+    <div class="sound-gallery">
+        {% for som in sons %}
+            <div class="sound-item">
+                {% if som.imagem_som %}
+                    <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
+                {% endif %}
+                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Navegação de paginação -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if sons.has_previous %}
+                <a href="?page=1">&laquo; primeira</a>
+                <a href="?page={{ sons.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ sons.number }} de {{ sons.paginator.num_pages }}.
+            </span>
+
+            {% if sons.has_next %}
+                <a href="?page={{ sons.next_page_number }}">próxima</a>
+                <a href="?page={{ sons.paginator.num_pages }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

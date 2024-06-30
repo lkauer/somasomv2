@@ -1,0 +1,22 @@
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+    <h1>{{ som.titulo }}</h1>
+    <div class="sound-gallery">
+        <div class="sound-item">
+                {% if som.imagem_som %}
+                    <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
+                {% endif %}
+                <p><strong>Artista:</strong> <a href="{% url 'visualizar_artista' som.artista.pk %}">{{ som.artista.nome }}</a></p>
+                {% if som.audio %}
+                    <audio controls>
+                        <source src="{{ som.audio.url }}" type="audio/{{ som.audio.url|slice:"-3:" }}">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <br>
+                    <a href="{{ som.audio.url }}" download="{{ som.titulo }}.{{ som.audio.url|slice:"-3:" }}" class="btn btn-primary">Download Áudio</a>
+                {% endif %}
+                <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+        </div>
+    </div>
+{% endblock %}

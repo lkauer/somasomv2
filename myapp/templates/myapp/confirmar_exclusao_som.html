@@ -3,11 +3,10 @@
 {% block content %}
 
     <h1>Excluir Som</h1>
-    <p>Tem certeza que deseja excluir o som {{ lancamento.titulo }}?</p>
+    <p>Tem certeza que deseja excluir o som {{ som.titulo }}?</p>
     <form method="post">
         {% csrf_token %}
         <button type="submit">Sim, excluir</button>
-        <a href="{% url 'painel_geral' %}">Cancelar</a>
     </form>
 
 {% endblock %}

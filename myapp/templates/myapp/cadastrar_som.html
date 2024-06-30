@@ -1,7 +1,7 @@
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
-    <h1>Editar Som</h1>
+    <h1>Cadastrar Som</h1>
     {% if messages %}
         <ul>
             {% for message in messages %}
@@ -10,15 +10,14 @@
         </ul>
     {% endif %}
 
-    <form method="post" enctype="multipart/form-data" id="lancamentoForm">
+    <form method="post" enctype="multipart/form-data" id="somForm">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" id="submitBtn">Salvar</button>
     </form>
-    <a href="{% url 'listar_lancamentos' %}">Voltar</a>
 
     <script>
-        document.getElementById('lancamentoForm').addEventListener('submit', function() {
+        document.getElementById('somForm').addEventListener('submit', function() {
             document.getElementById('submitBtn').disabled = true;
         });
     </script>
