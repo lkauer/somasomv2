@@ -4,16 +4,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 from django.conf import settings
 
 def index(request):
     return render(request, 'myapp/index.html')
-
-def manifesto(request):
-    return render(request, 'myapp/manifesto.html')
 
 def visualizar_som(request, pk):
     try:

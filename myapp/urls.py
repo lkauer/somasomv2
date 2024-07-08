@@ -14,5 +14,4 @@ urlpatterns = [
     path('painel_geral/', views.painel_geral, name='painel_geral'),
     path('visualizar_artista/<int:pk>/', views.visualizar_artista, name='visualizar_artista'),
     path('visualizar_som/<int:pk>/', views.visualizar_som, name='visualizar_som'),
-    path('manifesto/', views.manifesto, name='manifesto'),
 ]
