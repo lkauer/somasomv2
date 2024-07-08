@@ -69,7 +69,7 @@ def cadastrar_som(request):
 
 def listar_artistas(request):
     artista_list = Artista.objects.all()
-    paginator = Paginator(artista_list, 10)  # Mostra 10 artistas por página
+    paginator = Paginator(artista_list, 5)  # Mostra 5 artistas por página
 
     page = request.GET.get('page')
     try:
@@ -85,7 +85,7 @@ def listar_artistas(request):
 
 def listar_sons(request):
     som_list = Som.objects.all()
-    paginator = Paginator(som_list, 10)  # Mostra 10 sons por página
+    paginator = Paginator(som_list, 5)  # Mostra 5 sons por página
 
     page = request.GET.get('page')
     try:
