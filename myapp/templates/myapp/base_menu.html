@@ -215,6 +215,10 @@
                     <a href="/login">Acessar</a>
                     <a href="/signup">Cadastrar</a>
                 {% endif %}
+                <form action="{% url 'search_results' %}" method="get">
+                    <input type="text" name="q" placeholder="Buscar artistas e sons...">
+                    <button type="submit">Buscar</button>
+                </form>
             </div>
         </div>
     {% endblock %}
@@ -224,7 +228,8 @@
     </div>
 
     <div class="footer">
-        <p>Som a Som</p>
+        <a href="https://github.com/lkauer/somasomv2">Fonte</a>
+        <a href="mailto:lucasgkauer@gmail.com">| Contato</a>
     </div>
 </body>
 </html>

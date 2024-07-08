@@ -210,3 +210,18 @@ def excluir_som(request, pk):
         return redirect('painel_geral')
 
     return render(request, 'myapp/confirmar_exclusao_som.html', {'som': som})
+
+def search_results(request):
+    query = request.GET.get('q')
+    if query:
+        artistas = Artista.objects.filter(nome__icontains=query)
+        sons = Som.objects.filter(titulo__icontains=query)
+    else:
+        artistas = Artista.objects.none()
+        sons = Som.objects.none()
+
+    context = {
+        'artistas': artistas,
+        'sons': sons,
+    }
+    return render(request, 'myapp/search_results.html', context)

@@ -1,0 +1,41 @@
+{% extends "myapp/base_menu.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Resultados da Pesquisa</h1>
+
+{% if artistas or sons %}
+    <h2>Artistas</h2>
+    <div class="artist-gallery">
+            {% for artista in artistas %}
+            <div class="artist-item">
+                {% if artista.imagem_perfil %}
+                    <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
+                {% else %}
+                    <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
+                {% endif %}
+                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
+            </div>
+        {% empty %}
+            <p>Nenhum artista encontrado.</p>
+        {% endfor %}
+    </div>
+    <h2>Sons</h2>
+    <div class="sound-gallery">
+        {% for som in sons %}
+            <div class="sound-item">
+                {% if som.imagem_som %}
+                    <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
+                {% else %}
+                    <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
+                {% endif %}
+                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+            </div>
+        {% empty %}
+            <p>Nenhum Som encontrado.</p>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Nenhum resultado encontrado.</p>
+{% endif %}
+{% endblock %}

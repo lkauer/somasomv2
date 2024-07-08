@@ -6,12 +6,13 @@
     <div class="sound-gallery">
         {% for som in sons %}
             <div class="sound-item">
+                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">
                 {% if som.imagem_som %}
                     <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
                 {% else %}
                     <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
                 {% endif %}
-                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+                {{ som.titulo }}</a>
             </div>
         {% endfor %}
     </div>

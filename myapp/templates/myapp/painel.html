@@ -2,12 +2,9 @@
 {% load static %}
 
 {% block content %}
-    <h2>Painel</h2>
-
-    <a href="{% url 'cadastrar_artista' %}">Cadastrar Novo Artista</a>
-    <a href="{% url 'cadastrar_som' %}">Cadastrar Novo Som</a>
 
     <h2>Meus artistas:</h2>
+    <a href="{% url 'cadastrar_artista' %}">Cadastrar Novo Artista</a>
     <div class="artist-gallery">
         {% for artista in artistas %}
             <div class="artist-item">
@@ -21,12 +18,13 @@
                 <a href="{% url 'excluir_artista' artista.pk %}">Excluir</a>  <!-- Link para confirmação de exclusão -->
             </div>
         {% empty %}
-            <li>Nenhum artista encontrado.</li>
+            <p>Nenhum artista encontrado.</p>
         {% endfor %}
     </div>
 
 
     <h2>Meus sons:</h2>
+    <a href="{% url 'cadastrar_som' %}">Cadastrar Novo Som</a>
     <div class="sound-gallery">
     {% for som in sons %}
         <div class="sound-item">
@@ -40,7 +38,7 @@
             <a href="{% url 'excluir_som' pk=som.pk %}">Excluir Som</a>
         </div>
         {% empty %}
-            <li>Nenhum Som encontrado.</li>
+            <p>Nenhum Som encontrado.</p>
         {% endfor %}
 </div>
 {% endblock %}

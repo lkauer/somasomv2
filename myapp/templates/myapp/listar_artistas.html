@@ -6,12 +6,13 @@
     <div class="artist-gallery">
         {% for artista in artistas %}
             <div class="artist-item">
+                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">
                 {% if artista.imagem_perfil %}
                     <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
                 {% else %}
                     <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
                 {% endif %}
-                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
+                {{ artista.nome }}</a>
             </div>
         {% endfor %}
     </div>
