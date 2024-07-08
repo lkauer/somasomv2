@@ -47,7 +47,6 @@ def cadastrar_artista(request):
             artista = form.save(commit=False)
             artista.usuario = request.user  # Atribui o usuário logado ao artista
             artista.save()
-            messages.success(request, 'Artista cadastrado com sucesso.')
             return redirect('painel_geral')  # Redireciona após o sucesso
     else:
         form = ArtistaForm()
@@ -62,7 +61,6 @@ def cadastrar_som(request):
             som = form.save(commit=False)
             som.usuario = request.user
             som.save()
-            messages.success(request, 'Som cadastrado com sucesso.')
             return redirect('painel_geral')
     else:
         form = SomForm(user=request.user)
@@ -137,7 +135,6 @@ def editar_artista(request, pk):
                 artista.imagem_perfil = None
 
             artista.save()
-            messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
     else:
         form = ArtistaForm(instance=artista)
@@ -172,7 +169,6 @@ def editar_som(request, pk):
                 som.audio = None
 
             som.save()
-            messages.success(request, 'Alteração realizada com sucesso.')
             return redirect('painel_geral')
     else:
         form = SomForm(instance=som, user=request.user)
