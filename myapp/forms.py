@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 class ArtistaForm(forms.ModelForm):
     class Meta:
         model = Artista
-        fields = ['nome', 'imagem_perfil']
+        fields = ['nome', 'imagem_perfil', 'descricao']
         widgets = {
             'imagem_perfil': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }
@@ -22,7 +22,7 @@ class ArtistaForm(forms.ModelForm):
 class SomForm(forms.ModelForm):
     class Meta:
         model = Som
-        fields = ['titulo', 'artista', 'imagem_som', 'audio']
+        fields = ['titulo', 'artista', 'imagem_som', 'audio', 'descricao']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)

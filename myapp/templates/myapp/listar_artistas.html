@@ -14,6 +14,8 @@
                 {% endif %}
                 {{ artista.nome }}</a>
             </div>
+        {% empty %}
+            <p>Nenhum artista encontrado.</p>
         {% endfor %}
     </div>
 
