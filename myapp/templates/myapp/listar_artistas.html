@@ -1,4 +1,5 @@
 {% extends "myapp/base_menu.html" %}
+{% load static %}
 
 {% block content %}
     <h1>Artistas</h1>
@@ -7,6 +8,8 @@
             <div class="artist-item">
                 {% if artista.imagem_perfil %}
                     <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
+                {% else %}
+                    <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
                 {% endif %}
                 <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
             </div>
