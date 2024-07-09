@@ -42,6 +42,57 @@
             align-items: center;
             flex: 1;
         }
+        .navbar-menu a {
+            display: block;
+            padding: 14px 20px;
+        }
+        .navbar-menu form {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-menu form input {
+            padding: 8px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .navbar-menu form button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+        .navbar-menu form button:hover {
+            background-color: #ddd;
+        }
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+        }
+        .menu-icon div {
+            width: 25px;
+            height: 3px;
+            background-color: #f2f2f2;
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+            .navbar-menu.active {
+                display: flex;
+            }
+            .menu-icon {
+                display: block;
+            }
+        }
         .container {
             padding: 20px;
             flex: 1;
@@ -88,115 +139,187 @@
         .step-links .current {
             font-weight: bold;
         }
-    .artist-gallery {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 20px;
-        justify-content: center;
-        padding: 20px;
-    }
+        .artist-gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
 
-    .artist-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 10px;
-        /*background-color: #fff;*/
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+        .artist-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    .artist-image {
-        width: 250px;
-        height: 250px;
-        object-fit: cover;
-        /*border-radius: 50%;*/
-        margin-bottom: 10px;
-    }
+        .artist-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
 
-    .artist-name {
-        color: #333;
-        text-decoration: none;
-        font-weight: bold;
-    }
+        .artist-name {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    .artist-name:hover {
-        text-decoration: underline;
-    }
-
-    .pagination {
-        margin: 20px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .step-links a, .step-links span {
-        margin: 0 5px;
-        padding: 8px 16px;
-        text-decoration: none;
-        color: #333;
-        background-color: #f2f2f2;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    .step-links a:hover {
-        background-color: #ddd;
-    }
-
-    .step-links .current {
-        font-weight: bold;
-    }
+        .artist-name:hover {
+            text-decoration: underline;
+        }
 
         .sound-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-     .sound-gallery {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 20px;
-        justify-content: center;
-        padding: 20px;
-    }
+         .sound-gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
 
-    .sound-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 10px;
-        /*background-color: #fff;*/
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+        .sound-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    .sound-image {
-        width: 250px;
-        height: 250px;
-        object-fit: cover;
-        /*border-radius: 50%;*/
-        margin-bottom: 10px;
-    }
+        .sound-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
 
-    .sound-name {
-        color: #333;
-        text-decoration: none;
-        font-weight: bold;
-    }
+        .sound-name {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    .sound-name:hover {
-        text-decoration: underline;
-    }
+        .sound-name:hover {
+            text-decoration: underline;
+        }
+        .artist-gallery, .sound-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .artist-item, .sound-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .artist-image, .sound-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .artist-name, .sound-name {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .artist-name:hover, .sound-name:hover {
+            text-decoration: underline;
+        }
+
+        @media (min-width: 769px) {
+            .artist-gallery, .sound-gallery {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .artist-gallery, .sound-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #333;
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 5px;
+            border-radius: 0;
+        }
+
+        .button:hover, .button:focus {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .pagination-button {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .pagination-button:hover {
+            background-color: #ccc;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .step-links a, .step-links span {
+            margin: 0 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .step-links a:hover {
+            background-color: #ddd;
+        }
+
+        .step-links .current {
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -205,7 +328,12 @@
             <a href="/">
                 <img src="{% static 'images/somasom_logo_branco_transparente.png' %}" alt="logo">
             </a>
-            <div class="navbar-menu">
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="navbar-menu" id="navbar-menu">
                 <a href="/listar_artistas">Artistas</a>
                 <a href="/listar_sons">Sons</a>
                 {% if user.is_authenticated %}
@@ -231,5 +359,12 @@
         <a href="https://github.com/lkauer/somasomv2">Fonte</a>
         <a href="mailto:lucasgkauer@gmail.com">| Contato</a>
     </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navbar-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

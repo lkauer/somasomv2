@@ -15,10 +15,11 @@
     <div class="sound-gallery">
         <div class="sound-item">
             {% for som in sons %}
+                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">
                 {% if som.imagem_som %}
                     <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
                 {% endif %}
-                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+                {{ som.titulo }}</a>
         {% empty %}
             <p>Nenhum som disponível.</p>
 -        {% endfor %}

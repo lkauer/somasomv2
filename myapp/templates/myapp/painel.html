@@ -4,41 +4,83 @@
 {% block content %}
 
     <h2>Meus artistas:</h2>
-    <a href="{% url 'cadastrar_artista' %}">Cadastrar Novo Artista</a>
+    <a href="{% url 'cadastrar_artista' %}" class="button primary-button">Cadastrar Novo Artista</a>
     <div class="artist-gallery">
         {% for artista in artistas %}
             <div class="artist-item">
-                {% if artista.imagem_perfil %}
-                    <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
-                {% else %}
-                    <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
-                {% endif %}
-                <p class="artist-name">{{ artista.nome }}</p>
-                <a href="{% url 'editar_artista' artista.pk %}">Editar</a>
-                <a href="{% url 'excluir_artista' artista.pk %}">Excluir</a>  <!-- Link para confirmação de exclusão -->
+                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">
+                    {% if artista.imagem_perfil %}
+                        <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
+                    {% else %}
+                        <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
+                    {% endif %}
+                    {{ artista.nome }}
+                </a>
+                <a href="{% url 'editar_artista' artista.pk %}" class="button secondary-button">Editar</a>
+                <a href="{% url 'excluir_artista' artista.pk %}" class="button danger-button">Excluir</a>
             </div>
         {% empty %}
             <p>Nenhum artista encontrado.</p>
         {% endfor %}
     </div>
 
+    <!-- Navegação de paginação -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if artistas.has_previous %}
+                <a href="?page=1" class="button pagination-button">&laquo; primeira</a>
+                <a href="?page={{ artistas.previous_page_number }}" class="button pagination-button">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ artistas.number }} de {{ artistas.paginator.num_pages }}.
+            </span>
+
+            {% if artistas.has_next %}
+                <a href="?page={{ artistas.next_page_number }}" class="button pagination-button">próxima</a>
+                <a href="?page={{ artistas.paginator.num_pages }}" class="button pagination-button">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 
     <h2>Meus sons:</h2>
-    <a href="{% url 'cadastrar_som' %}">Cadastrar Novo Som</a>
+    <a href="{% url 'cadastrar_som' %}" class="button primary-button">Cadastrar Novo Som</a>
     <div class="sound-gallery">
-    {% for som in sons %}
-        <div class="sound-item">
-            {% if som.imagem_som %}
-                <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
-            {% else %}
-                <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
-            {% endif %}
-            <p class="sound-name">{{ som.titulo }}</p>
-            <a href="{% url 'editar_som' pk=som.pk %}">Editar Som</a>
-            <a href="{% url 'excluir_som' pk=som.pk %}">Excluir Som</a>
-        </div>
+        {% for som in sons %}
+            <div class="sound-item">
+                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">
+                    {% if som.imagem_som %}
+                        <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
+                    {% else %}
+                        <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
+                    {% endif %}
+                    {{ som.titulo }}
+                </a>
+                <a href="{% url 'editar_som' pk=som.pk %}" class="button secondary-button">Editar Som</a>
+                <a href="{% url 'excluir_som' pk=som.pk %}" class="button danger-button">Excluir Som</a>
+            </div>
         {% empty %}
             <p>Nenhum som encontrado.</p>
         {% endfor %}
-</div>
+    </div>
+
+    <!-- Navegação de paginação -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if sons.has_previous %}
+                <a href="?page=1" class="button pagination-button">&laquo; primeira</a>
+                <a href="?page={{ sons.previous_page_number }}" class="button pagination-button">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ sons.number }} de {{ sons.paginator.num_pages }}.
+            </span>
+
+            {% if sons.has_next %}
+                <a href="?page={{ sons.next_page_number }}" class="button pagination-button">próxima</a>
+                <a href="?page={{ sons.paginator.num_pages }}" class="button pagination-button">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
 {% endblock %}

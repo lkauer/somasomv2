@@ -29,13 +29,6 @@ def visualizar_artista(request, pk):
     return render(request, 'myapp/visualizar_artista.html', {'artista': artista, 'sons': sons})
 
 @login_required(login_url='/')
-def painel_geral(request):
-    artistas = Artista.objects.filter(usuario=request.user)
-    sons = Som.objects.filter(usuario=request.user)
-
-    return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons})
-
-@login_required(login_url='/')
 def cadastrar_artista(request):
     if request.method == 'POST':
         form = ArtistaForm(request.POST, request.FILES)
@@ -63,9 +56,39 @@ def cadastrar_som(request):
 
     return render(request, 'myapp/cadastrar_som.html', {'form': form})
 
+@login_required(login_url='/')
+def painel_geral(request):
+    artista_list = Artista.objects.filter(usuario=request.user)
+    paginator_artists = Paginator(artista_list, 4)  # Mostra 4 artistas por página
+    page = request.GET.get('page')
+    try:
+        artistas = paginator_artists.page(page)
+    except PageNotAnInteger:
+        # Se a página não for um inteiro, mostra a primeira página
+        artistas = paginator_artists.page(1)
+    except EmptyPage:
+        # Se a página estiver fora do intervalo, mostra a última página
+        artistas = paginator_artists.page(paginator_artists.num_pages)
+
+
+    som_list = Som.objects.filter(usuario=request.user)
+    paginator_sounds = Paginator(som_list, 4)  # Mostra 4 sons por página
+
+    page = request.GET.get('page')
+    try:
+        sons = paginator_sounds.page(page)
+    except PageNotAnInteger:
+        # Se a página não for um inteiro, mostra a primeira página
+        sons = paginator_sounds.page(1)
+    except EmptyPage:
+        # Se a página estiver fora do intervalo, mostra a última página
+        sons = paginator_sounds.page(paginator_sounds.num_pages)
+
+    return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons})
+
 def listar_artistas(request):
     artista_list = Artista.objects.all()
-    paginator = Paginator(artista_list, 5)  # Mostra 5 artistas por página
+    paginator = Paginator(artista_list, 4)  # Mostra 4 artistas por página
 
     page = request.GET.get('page')
     try:
@@ -81,7 +104,7 @@ def listar_artistas(request):
 
 def listar_sons(request):
     som_list = Som.objects.all()
-    paginator = Paginator(som_list, 5)  # Mostra 5 sons por página
+    paginator = Paginator(som_list, 4)  # Mostra 4 sons por página
 
     page = request.GET.get('page')
     try:

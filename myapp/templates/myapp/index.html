@@ -1,23 +1,30 @@
 {% extends "myapp/base_menu.html" %}
+{% load static %}
 
 {% block content %}
-        <div class="container">
-        <h1>Som a Som</h1>
-        <p>Esta é a página inicial do seu site. Use o menu acima para navegar entre as seções.</p>
+<div class="banner">
+    <img src="{% static 'images/banner.png' %}" alt="Som a Som Banner" style="width: 100%; height: auto;">
+</div>
 
-        <section id="artistas">
-            <h2>Artistas</h2>
-            <a href="/listar_artistas">
-                <img src="https://via.placeholder.com/1200x300" alt="Painel de Artistas" class="panel">
-            </a>
-        </section>
+<div class="container">
+    <section class="section-description">
+        <h2>Sobre Nós</h2>
+        <p>Som a Som é uma rede independente de distribuição e colaboração sonora. Nossa missão é conectar artistas e ouvintes, proporcionando um espaço para a descoberta e o compartilhamento de novos sons. Acreditamos na força da colaboração e na diversidade de vozes para enriquecer o panorama musical.</p>
+    </section>
 
-        <section id="sons">
-            <h2>Sons</h2>
-            <a href="/listar_sons">
-                <img src="https://via.placeholder.com/1200x300" alt="Painel de Sons" class="panel">
-            </a>
-        </section>
-    </div>
+    <section class="section-open-source">
+        <h2>Código Fonte Aberto</h2>
+        <p>O código fonte da nossa plataforma é disponibilizado para que a colaboração ocorra tanto na parte artística quanto na parte técnica. Incentivamos desenvolvedores e entusiastas da música a contribuírem com melhorias, novas funcionalidades e a expansão do nosso ecossistema.</p>
+        <p><a href="https://github.com/lkauer/somasomv2">Acesse nosso GitHub</a></p>
+    </section>
 
+    <section class="section-support">
+        <h2>Apoie Nosso Serviço</h2>
+        <p>Manter o Som a Som funcionando requer esforço e recursos. Se você aprecia nosso serviço e deseja nos ajudar a mantê-lo em pé, considere fazer uma doação. Cada contribuição é valiosa e nos ajuda a continuar oferecendo um espaço de colaboração e distribuição sonora independente.</p>
+        <div class="qr-code">
+            <img src="{% static 'images/qrcode_pix.png' %}" alt="QR Code para doação via Pix" style="width: 200px; height: 200px;">
+            <p>Escaneie o QR Code para doar via Pix</p>
+        </div>
+    </section>
+</div>
 {% endblock %}
