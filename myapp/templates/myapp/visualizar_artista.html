@@ -1,4 +1,5 @@
 {% extends "myapp/base_menu.html" %}
+{% load static %}
 
 {% block content %}
     <h1>{{ artista.nome }}</h1>
@@ -13,16 +14,37 @@
     <h2>Sons</h2>
 
     <div class="sound-gallery">
-        <div class="sound-item">
-            {% for som in sons %}
+        {% for som in sons %}
+            <div class="sound-item">
                 <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">
                 {% if som.imagem_som %}
                     <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
+                {% else %}
+                    <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
                 {% endif %}
                 {{ som.titulo }}</a>
+            </div>
         {% empty %}
-            <p>Nenhum som disponível.</p>
--        {% endfor %}
-        </div>
+            <p>Nenhum som encontrado.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Navegação de paginação -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if sons.has_previous %}
+                <a href="?page=1">&laquo; primeira</a>
+                <a href="?page={{ sons.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ sons.number }} de {{ sons.paginator.num_pages }}.
+            </span>
+
+            {% if sons.has_next %}
+                <a href="?page={{ sons.next_page_number }}">próxima</a>
+                <a href="?page={{ sons.paginator.num_pages }}">última &raquo;</a>
+            {% endif %}
+        </span>
     </div>
 {% endblock %}

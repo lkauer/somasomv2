@@ -1,4 +1,5 @@
 {% extends "myapp/base_menu.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -6,7 +7,8 @@
     <p>Tem certeza que deseja excluir o som {{ som.titulo }}?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Sim, excluir</button>
+        <button class="button" type="submit">Sim, excluir</button>
     </form>
+    <a class="button" href="/painel_geral">Voltar</a>
 
 {% endblock %}

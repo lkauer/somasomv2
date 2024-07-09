@@ -22,7 +22,19 @@ def visualizar_som(request, pk):
 def visualizar_artista(request, pk):
     try:
         artista = Artista.objects.get(pk=pk)
-        sons = Som.objects.filter(artista=artista)
+        som_list = Som.objects.filter(artista=artista)
+        paginator = Paginator(som_list, 4)  # Mostra 4 sons por página
+
+        page = request.GET.get('page')
+        try:
+            sons = paginator.page(page)
+        except PageNotAnInteger:
+            # Se a página não for um inteiro, mostra a primeira página
+            sons = paginator.page(1)
+        except EmptyPage:
+            # Se a página estiver fora do intervalo, mostra a última página
+            sons = paginator.page(paginator.num_pages)
+
     except Artista.DoesNotExist:
         return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Artista não encontrado.'})
 

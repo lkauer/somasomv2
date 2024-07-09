@@ -6,9 +6,9 @@
     <form method="post" enctype="multipart/form-data" id="artistaForm">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" id="submitBtn">Salvar</button>
+        <button class="button" type="submit" id="submitBtn">Salvar</button>
     </form>
-
+    <a class="button" href="/painel_geral">Voltar</a>
     <script>
         document.getElementById('artistaForm').addEventListener('submit', function() {
             document.getElementById('submitBtn').disabled = true;
