@@ -2,40 +2,81 @@
 {% load static %}
 
 {% block content %}
-<h1>Resultados da Pesquisa</h1>
+    <h1>Resultados da busca por: "{{ query }}"</h1>
 
-{% if artistas or sons %}
     <h2>Artistas</h2>
     <div class="artist-gallery">
-            {% for artista in artistas %}
+        {% for artista in artistas %}
             <div class="artist-item">
                 {% if artista.imagem_perfil %}
                     <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
-                {% else %}
-                    <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
                 {% endif %}
                 <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
+                <p>{{ artista.descricao }}</p>
             </div>
         {% empty %}
             <p>Nenhum artista encontrado.</p>
         {% endfor %}
     </div>
+
+    <!-- Navegação de paginação para artistas -->
+    <div class="pagination" style="text-align: center;">
+        <span class="step-links">
+            {% if artistas.has_previous %}
+                <a href="?q={{ query }}&artista_page=1&som_page={{ sons.number }}">« primeira</a>
+                <a href="?q={{ query }}&artista_page={{ artistas.previous_page_number }}&som_page={{ sons.number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ artistas.number }} de {{ artistas.paginator.num_pages }}.
+            </span>
+
+            {% if artistas.has_next %}
+                <a href="?q={{ query }}&artista_page={{ artistas.next_page_number }}&som_page={{ sons.number }}">próxima</a>
+                <a href="?q={{ query }}&artista_page={{ artistas.paginator.num_pages }}&som_page={{ sons.number }}">última »</a>
+            {% endif %}
+        </span>
+    </div>
+
     <h2>Sons</h2>
     <div class="sound-gallery">
         {% for som in sons %}
             <div class="sound-item">
-                {% if som.imagem_som %}
-                    <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
-                {% else %}
-                    <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
-                {% endif %}
+                <img src="{% if som.imagem_som %}{{ som.imagem_som.url }}{% else %}{% static 'images/somasom_logo_fundolaranja.png' %}{% endif %}" alt="{% if som.imagem_som %}{{ som.titulo }}{% else %}Imagem padrão{% endif %}" class="sound-image">
                 <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+                {% if som.audio %}
+                    <audio controls style="width: 100%;">
+                        <source src="{{ som.audio.url }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                {% else %}
+                    <p style="text-align: center;">Nenhum arquivo de áudio disponível.</p>
+                {% endif %}
+                {% if som.descricao %}
+                    <p style="text-align: center;">{{ som.descricao }}</p>
+                {% endif %}
             </div>
         {% empty %}
-            <p>Nenhum Som encontrado.</p>
+            <p>Nenhum som encontrado.</p>
         {% endfor %}
     </div>
-{% else %}
-    <p>Nenhum resultado encontrado.</p>
-{% endif %}
+
+    <!-- Navegação de paginação para sons -->
+    <div class="pagination" style="text-align: center;">
+        <span class="step-links">
+            {% if sons.has_previous %}
+                <a href="?q={{ query }}&som_page=1&artista_page={{ artistas.number }}">« primeira</a>
+                <a href="?q={{ query }}&som_page={{ sons.previous_page_number }}&artista_page={{ artistas.number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ sons.number }} de {{ sons.paginator.num_pages }}.
+            </span>
+
+            {% if sons.has_next %}
+                <a href="?q={{ query }}&som_page={{ sons.next_page_number }}&artista_page={{ artistas.number }}">próxima</a>
+                <a href="?q={{ query }}&som_page={{ sons.paginator.num_pages }}&artista_page={{ artistas.number }}">última »</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
