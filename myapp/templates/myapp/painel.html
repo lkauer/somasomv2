@@ -8,14 +8,14 @@
     <div class="artist-gallery">
         {% for artista in artistas %}
             <div class="artist-item">
-                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">
+                <a href="{% url 'visualizar_artista' artista.pk %}">
                     {% if artista.imagem_perfil %}
                         <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
                     {% else %}
                         <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
                     {% endif %}
-                    {{ artista.nome }}
                 </a>
+                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
                 <a href="{% url 'editar_artista' artista.pk %}" class="button secondary-button">Editar</a>
                 <a href="{% url 'excluir_artista' artista.pk %}" class="button danger-button">Excluir</a>
             </div>
@@ -48,14 +48,14 @@
     <div class="sound-gallery">
         {% for som in sons %}
             <div class="sound-item">
-                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">
+                <a href="{% url 'visualizar_som' som.pk %}">
                     {% if som.imagem_som %}
                         <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
                     {% else %}
                         <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
                     {% endif %}
-                    {{ som.titulo }}
                 </a>
+                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
                 <a href="{% url 'editar_som' pk=som.pk %}" class="button secondary-button">Editar Som</a>
                 <a href="{% url 'excluir_som' pk=som.pk %}" class="button danger-button">Excluir Som</a>
             </div>

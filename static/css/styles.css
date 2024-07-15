@@ -1,3 +1,4 @@
+/* Estilo geral do corpo */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,6 +9,7 @@ body {
     min-height: 100vh;
 }
 
+/* Barra de navegação */
 .navbar {
     background-color: #333;
     display: flex;
@@ -80,6 +82,7 @@ body {
     margin: 5px 0;
 }
 
+/* Layout responsivo para a barra de navegação */
 @media (max-width: 768px) {
     .navbar-menu {
         display: none;
@@ -107,12 +110,14 @@ h1, h2 {
     color: #333;
 }
 
+/* Painéis */
 .panel {
     width: 100%;
     margin: 20px 0;
     border-radius: 8px;
 }
 
+/* Rodapé */
 .footer {
     background-color: #333;
     color: #f2f2f2;
@@ -129,6 +134,7 @@ h1, h2 {
     color: #ddd;
 }
 
+/* Paginação */
 .pagination {
     margin: 20px 0;
     display: flex;
@@ -154,87 +160,7 @@ h1, h2 {
     font-weight: bold;
 }
 
-.artist-gallery {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-}
-
-.artist-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.artist-image {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.artist-name {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.artist-name:hover {
-    text-decoration: underline;
-}
-
-.sound-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.sound-gallery {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-}
-
-.sound-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.sound-image {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.sound-name {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.sound-name:hover {
-    text-decoration: underline;
-}
-
+/* Galeria de artistas e sons */
 .artist-gallery, .sound-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -254,10 +180,11 @@ h1, h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Imagens de artistas e sons */
 .artist-image, .sound-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    width: 250px;
+    height: 250px;
+    object-fit: cover; /* Mantém o layout quadrado sem distorção */
     margin-bottom: 10px;
 }
 
@@ -271,6 +198,7 @@ h1, h2 {
     text-decoration: underline;
 }
 
+/* Layout responsivo para galerias */
 @media (min-width: 769px) {
     .artist-gallery, .sound-gallery {
         grid-template-columns: repeat(4, 1fr);
@@ -345,6 +273,7 @@ h1, h2 {
     font-weight: bold;
 }
 
+/* Container de login */
 .login-container {
     max-width: 400px;
     margin: 50px auto;
@@ -375,68 +304,193 @@ h1, h2 {
 
 .login-container form button {
     padding: 10px;
-    border: none;
-    border-radius: 4px;
     background-color: #333;
     color: #fff;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .login-container form button:hover {
-    background-color: #ff8c00;
+    background-color: #555;
 }
 
-.login-container a {
+.login-container p {
     text-align: center;
-    display: block;
-    margin-top: 10px;
+}
+
+.login-container p a {
     color: #333;
     text-decoration: none;
+    font-weight: bold;
 }
 
-.login-container a:hover {
+.login-container p a:hover {
     text-decoration: underline;
 }
 
-/* Tooltips */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+.registro-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 200px;
+.registro-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.registro-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.registro-container form input[type="text"],
+.registro-container form input[type="email"],
+.registro-container form input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.registro-container form button {
+    padding: 10px;
     background-color: #333;
     color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.registro-container form button:hover {
+    background-color: #555;
+}
+
+.registro-container p {
     text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position above the tooltip element */
-    left: 50%;
-    margin-left: -100px; /* Center the tooltip */
-    opacity: 0;
-    transition: opacity 0.3s;
 }
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+.registro-container p a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.tooltip-icon {
+.registro-container p a:hover {
+    text-decoration: underline;
+}
+
+.songs-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.song-item {
+    flex: 1 1 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.song-item h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.song-item p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.song-item a {
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-color: #000;
-    color: #fff;
-    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
-    line-height: 20px;
+    text-decoration: none;
+    border: 2px solid #333;
+    background-color: #333;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.song-item a:hover, .song-item a:focus {
+    background-color: #fff;
+    color: #333;
+    border-color: #333;
+}
+
+/* Tabela de listagem de músicas */
+.song-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.song-table th,
+.song-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.song-table th {
+    background-color: #f2f2f2;
+}
+
+.song-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.song-table .actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.song-table .actions form {
+    display: inline;
+}
+
+.song-table .actions button {
+    padding: 5px 10px;
     font-size: 14px;
     font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #333;
+    background-color: #333;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: 5px;
+}
+
+.song-table .actions button:hover, .song-table .actions button:focus {
+    background-color: #fff;
+    color: #333;
+    border-color: #333;
+}
+
+.song-table .actions button.delete {
+    border-color: red;
+    background-color: red;
+}
+
+.song-table .actions button.delete:hover, .song-table .actions button.delete:focus {
+    background-color: #fff;
+    color: red;
 }
