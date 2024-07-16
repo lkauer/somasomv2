@@ -96,7 +96,7 @@ def painel_geral(request):
 
 def listar_artistas(request):
     artista_list = Artista.objects.all()
-    paginator = Paginator(artista_list, 4)  # Mostra 4 artistas por página
+    paginator = Paginator(artista_list, 8)  # Mostra 4 artistas por página
 
     page = request.GET.get('page')
     try:
@@ -112,7 +112,7 @@ def listar_artistas(request):
 
 def listar_sons(request):
     som_list = Som.objects.all()
-    paginator = Paginator(som_list, 4)  # Mostra 4 sons por página
+    paginator = Paginator(som_list, 8)  # Mostra 8 sons por página
 
     page = request.GET.get('page')
     try:

@@ -207,9 +207,24 @@ h1, h2 {
 
 @media (max-width: 768px) {
     .artist-gallery, .sound-gallery {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px; /* Adiciona espaço entre os itens */
+    }
+
+    .artist-item, .sound-item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .artist-image, .sound-image {
+        width: 70%; /* Reduz a largura das imagens em 30% */
+        height: auto;
+        margin: 0 auto; /* Centraliza a imagem horizontalmente */
+        aspect-ratio: 1; /* Mantém a imagem quadrada */
+        object-fit: cover; /* Ajusta a imagem para cobrir completamente o contêiner */
     }
 }
+
 
 .button {
     display: inline-block;
