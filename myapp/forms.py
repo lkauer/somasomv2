@@ -29,6 +29,7 @@ class SomForm(forms.ModelForm):
         super(SomForm, self).__init__(*args, **kwargs)
         if user:
             self.fields['artista'].queryset = Artista.objects.filter(usuario=user)
+        self.fields['imagem_som'].label = 'Capa'
 
     def clean_imagem_som(self):
         imagem_som = self.cleaned_data.get('imagem_som', False)

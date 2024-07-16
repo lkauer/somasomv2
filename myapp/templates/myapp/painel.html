@@ -4,7 +4,7 @@
 {% block content %}
 
     <h2>Meus artistas:</h2>
-    <a href="{% url 'cadastrar_artista' %}" class="button primary-button">Cadastrar Novo Artista</a>
+    <a href="{% url 'cadastrar_artista' %}" class="button ">Cadastrar Novo Artista</a>
     <div class="artist-gallery">
         {% for artista in artistas %}
             <div class="artist-item">
@@ -44,7 +44,7 @@
     </div>
 
     <h2>Meus sons:</h2>
-    <a href="{% url 'cadastrar_som' %}" class="button primary-button">Cadastrar Novo Som</a>
+    <a href="{% url 'cadastrar_som' %}" class="button ">Cadastrar Novo Som</a>
     <div class="sound-gallery">
         {% for som in sons %}
             <div class="sound-item">

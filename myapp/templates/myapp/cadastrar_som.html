@@ -1,6 +1,7 @@
 {% extends "myapp/base_menu.html" %}
 
 {% block content %}
+<div class="form-container">
     <h1>Cadastrar Som</h1>
 
     <form method="post" enctype="multipart/form-data" id="somForm">
@@ -14,4 +15,5 @@
             document.getElementById('submitBtn').disabled = true;
         });
     </script>
+    </div>
 {% endblock %}

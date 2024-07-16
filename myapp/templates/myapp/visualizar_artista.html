@@ -18,21 +18,16 @@
 
         <div class="sound-gallery">
             {% for som in sons %}
-                <div class="sound-item">
-                    <img src="{% if som.imagem_som %}{{ som.imagem_som.url }}{% else %}{% static 'images/somasom_logo_fundolaranja.png' %}{% endif %}" alt="{% if som.imagem_som %}{{ som.titulo }}{% else %}Imagem padrão{% endif %}" class="sound-image">
-                    <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
-                    {% if som.audio %}
-                        <audio controls style="width: 100%;">
-                            <source src="{{ som.audio.url }}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+            <div class="sound-item">
+                <a href="{% url 'visualizar_som' som.pk %}">
+                    {% if som.imagem_som %}
+                        <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
                     {% else %}
-                        <p style="text-align: center;">Nenhum arquivo de áudio disponível.</p>
+                        <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
                     {% endif %}
-                    {% if som.descricao %}
-                        <p style="text-align: center;">{{ som.descricao }}</p>
-                    {% endif %}
-                </div>
+                </a>
+                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+            </div>
             {% empty %}
                 <p style="text-align: center;">Nenhum som encontrado.</p>
             {% endfor %}

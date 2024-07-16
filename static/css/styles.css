@@ -494,3 +494,136 @@ h1, h2 {
     background-color: #fff;
     color: red;
 }
+
+/* Estilo para o banner */
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilo das seções */
+.section-description, .section-open-source, .section-support {
+    margin-bottom: 60px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Estilo dos botões */
+.button.primary-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.button.primary-button:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Estilo do QR Code */
+.qr-code {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.qr-image {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Estilo de mídia para dispositivos móveis */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .section-description, .section-open-source, .section-support {
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .qr-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Estilo para os formulários */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container form label {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-container form input[type="text"],
+.form-container form input[type="file"],
+.form-container form textarea,
+.form-container form select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

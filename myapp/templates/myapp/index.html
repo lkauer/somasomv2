@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="banner">
-    <img src="{% static 'images/banner.png' %}" alt="Som a Som Banner" style="width: 100%; height: auto;">
+    <img src="{% static 'images/banner.png' %}" alt="Som a Som Banner" class="banner-image">
 </div>
 
 <div class="container">
@@ -15,15 +15,15 @@
     <section class="section-open-source">
         <h2>Código Fonte Aberto</h2>
         <p>O código fonte da nossa plataforma é disponibilizado para que a colaboração ocorra tanto na parte artística quanto na parte técnica. Incentivamos desenvolvedores e entusiastas da música a contribuírem com melhorias, novas funcionalidades e a expansão do nosso ecossistema.</p>
-        <p><a href="https://github.com/lkauer/somasomv2">Acesse nosso GitHub</a></p>
+        <p><a href="https://github.com/lkauer/somasomv2" class="button ">Acesse nosso GitHub</a></p>
     </section>
 
     <section class="section-support">
         <h2>Apoie Nosso Serviço</h2>
         <p>Manter o Som a Som funcionando requer esforço e recursos. Se você aprecia nosso serviço e deseja nos ajudar a mantê-lo em pé, considere fazer uma doação. Cada contribuição é valiosa e nos ajuda a continuar oferecendo um espaço de colaboração e distribuição sonora independente.</p>
         <div class="qr-code">
-            <img src="{% static 'images/qrcode_pix.jpeg' %}" alt="QR Code para doação via Pix" style="width: 200px; height: 200px;">
             <p>Escaneie o QR Code para doar via Pix</p>
+            <img src="{% static 'images/qrcode_pix.jpeg' %}" alt="QR Code para doação via Pix" class="qr-image">
         </div>
     </section>
 </div>
