@@ -11,6 +11,9 @@ from django.conf import settings
 def index(request):
     return render(request, 'myapp/index.html')
 
+def privacy_policy(request):
+    return render(request, 'myapp/privacy_policy.html')
+
 def visualizar_som(request, pk):
     try:
         som = Som.objects.get(pk=pk)

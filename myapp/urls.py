@@ -15,4 +15,6 @@ urlpatterns = [
     path('visualizar_artista/<int:pk>/', views.visualizar_artista, name='visualizar_artista'),
     path('visualizar_som/<int:pk>/', views.visualizar_som, name='visualizar_som'),
     path('search_results/', views.search_results, name='search_results'),
+    path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
+
 ]
