@@ -649,3 +649,99 @@ p {
     color: #f2f2f2;
     margin: 0 10px;
 }
+
+/* Estilo específico para a seção do artista */
+.view-artist-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    text-align: center; /* Para centralizar o texto em telas menores */
+}
+
+.view-artist-image-container {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    margin: 0 auto 20px auto; /* Para centralizar a imagem em telas menores */
+    padding: 10px; /* Adiciona espaço ao redor da div */
+}
+
+.view-artist-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.view-artist-details {
+    flex: 2;
+    min-width: 300px;
+    margin: 0 auto; /* Para centralizar o texto em telas menores */
+    padding: 10px; /* Adiciona espaço ao redor da div */
+}
+
+.view-artist-name {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.view-artist-description {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Estilo específico para a seção de sons */
+.view-sound-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.view-sound-item {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 300px;
+}
+
+.view-sound-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.view-sound-name {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.view-sound-name:hover {
+    text-decoration: underline;
+}
+
+.view-audio-player {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.view-no-audio, .view-sound-description {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #555;
+}
+
+.view-no-sounds {
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+}
