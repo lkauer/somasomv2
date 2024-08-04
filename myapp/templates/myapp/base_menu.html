@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>Som a Som</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2086528102918903"
-     crossorigin="anonymous"></script>
+    <!--<meta name="monetag" content="fad533284701e089539e2399f7ed3ec2">-->
 </head>
 <body>
     {% block nav %}
@@ -57,8 +56,8 @@
         <a href="https://github.com/lkauer/somasomv2" target="_blank">
             <i class="fab fa-github"></i> GitHub
         </a>
-        <a href="{% url 'privacy_policy' %}">
-            <i class="fas fa-user-secret"></i> Política de Privacidade
+        <a href="{% url 'about' %}">
+            <i class="fas fa-info-circle"></i> Sobre nós
         </a>
     </div>
 
@@ -68,5 +67,7 @@
             menu.classList.toggle('active');
         }
     </script>
+    <!--<script src="https://alwingulla.com/88/tag.min.js" data-zone="80658" async data-cfasync="false"></script>-->
+
 </body>
 </html>

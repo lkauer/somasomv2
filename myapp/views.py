@@ -6,13 +6,39 @@ from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
-from django.conf import settings
+# from django.conf import settings
+# from django.http import HttpResponse
 
 def index(request):
-    return render(request, 'myapp/index.html')
+            # Paginação para artistas
+    artista_list = Artista.objects.order_by('-id')[:4]
+    paginator_artists = Paginator(artista_list, 4)  # Mostra 4 artistas por página
+    artista_page = request.GET.get('artista_page')
+    try:
+        artistas = paginator_artists.page(artista_page)
+    except PageNotAnInteger:
+        artistas = paginator_artists.page(1)
+    except EmptyPage:
+        artistas = paginator_artists.page(paginator_artists.num_pages)
 
-def privacy_policy(request):
-    return render(request, 'myapp/privacy_policy.html')
+    # Paginação para sons
+    som_list = Som.objects.order_by('-id')[:4]
+    paginator_sounds = Paginator(som_list, 4)  # Mostra 4 sons por página
+    som_page = request.GET.get('som_page')
+    try:
+        sons = paginator_sounds.page(som_page)
+    except PageNotAnInteger:
+        sons = paginator_sounds.page(1)
+    except EmptyPage:
+        sons = paginator_sounds.page(paginator_sounds.num_pages)
+
+    return render(request, 'myapp/index.html', {'artistas': artistas, 'sons': sons})
+
+def about(request):
+    return render(request, 'myapp/about.html')
+
+# def privacy_policy(request):
+#     return render(request, 'myapp/privacy_policy.html')
 
 def visualizar_som(request, pk):
     try:

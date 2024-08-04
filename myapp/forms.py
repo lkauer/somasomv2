@@ -41,8 +41,8 @@ class SomForm(forms.ModelForm):
     def clean_audio(self):
         audio = self.cleaned_data.get('audio', False)
         if audio:
-            if not audio.name.lower().endswith(('mp3', 'wav')):
-                raise ValidationError("Apenas arquivos MP3 e WAV são permitidos.")
+            if not audio.name.lower().endswith(('mp3')):
+                raise ValidationError("Apenas arquivos MP3 são permitidos.")
         return audio
 
 class SignUpForm(UserCreationForm):

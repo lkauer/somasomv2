@@ -217,7 +217,7 @@ h1, h2 {
     }
 
     .artist-image, .sound-image {
-        width: 70%; /* Reduz a largura das imagens em 30% */
+        width: 100%;
         height: auto;
         margin: 0 auto; /* Centraliza a imagem horizontalmente */
         aspect-ratio: 1; /* Mantém a imagem quadrada */
