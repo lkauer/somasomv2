@@ -1,9 +1,11 @@
 <!-- myapp/templates/myapp/registro_nao_encontrado.html -->
 {% extends "myapp/base_menu.html" %}
+{% load static %}
 
 {% block content %}
     <div class="alert alert-danger">
         <h1>Ops... Nada por aqui</h1>
+            <img src="{% static 'images/john-travolta.gif' %}" alt="Not found">
         <p>{{ mensagem }}</p>
         <a href="{% url 'index' %}" class="btn btn-primary">Voltar</a>
     </div>
