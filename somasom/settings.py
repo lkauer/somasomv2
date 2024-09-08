@@ -25,7 +25,7 @@ SECRET_KEY = '@l4^^4)ww9gt996-*$gk3r@_ofavf_3(yz*tvi%@bi6e!-gop1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lucaskauer.pythonanywhere.com']
+ALLOWED_HOSTS = ['lucaskauer.pythonanywhere.com', 'www.somasom.app']
 
 
 # Application definition
@@ -74,10 +74,22 @@ WSGI_APPLICATION = 'somasom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# banco antigo
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lucaskauer$somasom',
+        'USER': 'lucaskauer',
+        'PASSWORD': 'meumenu22#B',
+        'HOST': 'lucaskauer.mysql.pythonanywhere-services.com',
+        'PORT': '3306',  # O padrão para MySQL
     }
 }
 
