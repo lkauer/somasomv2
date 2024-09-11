@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@l4^^4)ww9gt996-*$gk3r@_ofavf_3(yz*tvi%@bi6e!-gop1'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,14 +83,25 @@ WSGI_APPLICATION = 'somasom.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'lucaskauer$somasom',
+#         'USER': 'lucaskauer',
+#         'PASSWORD': 'meumenu22#B',
+#         'HOST': 'lucaskauer.mysql.pythonanywhere-services.com',
+#         'PORT': '3306',  # O padrão para MySQL
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lucaskauer$somasom',
-        'USER': 'lucaskauer',
-        'PASSWORD': 'meumenu22#B',
-        'HOST': 'lucaskauer.mysql.pythonanywhere-services.com',
-        'PORT': '3306',  # O padrão para MySQL
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
