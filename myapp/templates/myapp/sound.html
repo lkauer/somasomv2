@@ -1,0 +1,27 @@
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="view-artist-section">
+            <div class="view-artist-image-container">
+                {% if som.imagem_som %}
+                    <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="view-artist-image">
+                {% endif %}
+            </div>
+            <div class="view-artist-details">
+                <h1 class="view-artist-name">{{ som.titulo }}</h1>
+                <p><strong>Artista:</strong> <a href="{% url 'artist' som.artista.pk %}">{{ som.artista.nome }}</a></p>
+                <p class="view-artist-description">{{ som.descricao }}</p>
+                {% if som.audio %}
+                    <audio controls>
+                        <source src="{{ som.audio.url }}" type="audio/{{ som.audio.url|slice:"-3:" }}">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <br>
+                    <a href="{{ som.audio.url }}" download="{{ som.titulo }}.{{ som.audio.url|slice:"-3:" }}" class="btn btn-primary">Download Áudio</a>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

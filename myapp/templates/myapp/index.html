@@ -9,13 +9,13 @@
     <div class="artist-gallery">
         {% for artista in artistas %}
             <div class="artist-item">
-                <a href="{% url 'visualizar_artista' artista.pk %}">
+                <a href="{% url 'artist' artista.pk %}">
                     {% if artista.imagem_perfil %}
                         <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
                     {% else %}
                         <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
                     {% endif %}
-                    <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
+                    <a href="{% url 'artist' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
                 </a>
             </div>
         {% endfor %}
@@ -25,14 +25,14 @@
     <div class="sound-gallery">
         {% for som in sons %}
             <div class="sound-item">
-                <a href="{% url 'visualizar_som' som.pk %}">
+                <a href="{% url 'sound' som.pk %}">
                     {% if som.imagem_som %}
                         <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
                     {% else %}
                         <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
                     {% endif %}
                 </a>
-                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+                <a href="{% url 'sound' som.pk %}" class="sound-name">{{ som.titulo }}</a>
             </div>
         {% endfor %}
     </div>
