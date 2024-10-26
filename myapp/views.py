@@ -40,15 +40,15 @@ def about(request):
 # def privacy_policy(request):
 #     return render(request, 'myapp/privacy_policy.html')
 
-def visualizar_som(request, pk):
+def sound(request, pk):
     try:
         som = Som.objects.get(pk=pk)
     except Som.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Som não encontrado.'})
+        return render(request, 'myapp/not_found.html', {'mensagem': 'Som não encontrado.'})
 
-    return render(request, 'myapp/visualizar_som.html', {'som': som})
+    return render(request, 'myapp/sound.html', {'som': som})
 
-def visualizar_artista(request, pk):
+def artist(request, pk):
     try:
         artista = Artista.objects.get(pk=pk)
         som_list = Som.objects.filter(artista=artista)
@@ -65,40 +65,40 @@ def visualizar_artista(request, pk):
             sons = paginator.page(paginator.num_pages)
 
     except Artista.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Artista não encontrado.'})
+        return render(request, 'myapp/not_found.html', {'mensagem': 'Artista não encontrado.'})
 
-    return render(request, 'myapp/visualizar_artista.html', {'artista': artista, 'sons': sons})
+    return render(request, 'myapp/artist.html', {'artista': artista, 'sons': sons})
 
 @login_required(login_url='/')
-def cadastrar_artista(request):
+def add_artist(request):
     if request.method == 'POST':
         form = ArtistaForm(request.POST, request.FILES)
         if form.is_valid():
             artista = form.save(commit=False)
             artista.usuario = request.user  # Atribui o usuário logado ao artista
             artista.save()
-            return redirect('painel_geral')  # Redireciona após o sucesso
+            return redirect('general_panel')  # Redireciona após o sucesso
     else:
         form = ArtistaForm()
 
-    return render(request, 'myapp/cadastrar_artista.html', {'form': form})
+    return render(request, 'myapp/add_artist.html', {'form': form})
 
 @login_required(login_url='/')
-def cadastrar_som(request):
+def add_sound(request):
     if request.method == 'POST':
         form = SomForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             som = form.save(commit=False)
             som.usuario = request.user
             som.save()
-            return redirect('painel_geral')
+            return redirect('general_panel')
     else:
         form = SomForm(user=request.user)
 
-    return render(request, 'myapp/cadastrar_som.html', {'form': form})
+    return render(request, 'myapp/add_sound.html', {'form': form})
 
 @login_required(login_url='/')
-def painel_geral(request):
+def general_panel(request):
     # Paginação para artistas
     artista_list = Artista.objects.filter(usuario=request.user)
     paginator_artists = Paginator(artista_list, 4)  # Mostra 4 artistas por página
@@ -123,7 +123,7 @@ def painel_geral(request):
 
     return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons})
 
-def listar_artistas(request):
+def list_artists(request):
     artista_list = Artista.objects.all()
     paginator = Paginator(artista_list, 8)  # Mostra 4 artistas por página
 
@@ -137,9 +137,9 @@ def listar_artistas(request):
         # Se a página estiver fora do intervalo, mostra a última página
         artistas = paginator.page(paginator.num_pages)
 
-    return render(request, 'myapp/listar_artistas.html', {'artistas': artistas})
+    return render(request, 'myapp/list_artists.html', {'artistas': artistas})
 
-def listar_sons(request):
+def list_sounds(request):
     som_list = Som.objects.all()
     paginator = Paginator(som_list, 8)  # Mostra 8 sons por página
 
@@ -153,7 +153,7 @@ def listar_sons(request):
         # Se a página estiver fora do intervalo, mostra a última página
         sons = paginator.page(paginator.num_pages)
 
-    return render(request, 'myapp/listar_sons.html', {'sons': sons})
+    return render(request, 'myapp/list_sounds.html', {'sons': sons})
 
 def signup(request):
     if request.method == 'POST':
@@ -164,17 +164,17 @@ def signup(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('painel_geral')
+            return redirect('general_panel')
     else:
         form = SignUpForm()
     return render(request, 'myapp/signup.html', {'form': form})
 
 @login_required(login_url='/')
-def editar_artista(request, pk):
+def edit_artist(request, pk):
     try:
         artista = Artista.objects.get(pk=pk, usuario=request.user)
     except Artista.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Artista não encontrado.'})
+        return render(request, 'myapp/not_found.html', {'mensagem': 'Artista não encontrado.'})
 
     imagem_anterior = artista.imagem_perfil.path if artista.imagem_perfil else None  # Armazena o caminho da imagem anterior
 
@@ -191,17 +191,17 @@ def editar_artista(request, pk):
                 artista.imagem_perfil = None
 
             artista.save()
-            return redirect('painel_geral')
+            return redirect('general_panel')
     else:
         form = ArtistaForm(instance=artista)
-    return render(request, 'myapp/editar_artista.html', {'form': form})
+    return render(request, 'myapp/edit_artist.html', {'form': form})
 
 @login_required(login_url='/')
-def editar_som(request, pk):
+def edit_sound(request, pk):
     try:
         som = Som.objects.get(pk=pk, usuario=request.user)
     except Som.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Som não encontrado.'})
+        return render(request, 'myapp/not_found.html', {'mensagem': 'Som não encontrado.'})
 
     imagem_anterior = som.imagem_som.path if som.imagem_som else None  # Armazena o caminho da imagem anterior
     audio_anterior = som.audio.path if som.audio else None  # Armazena o caminho do áudio anterior
@@ -225,17 +225,17 @@ def editar_som(request, pk):
                 som.audio = None
 
             som.save()
-            return redirect('painel_geral')
+            return redirect('general_panel')
     else:
         form = SomForm(instance=som, user=request.user)
-    return render(request, 'myapp/editar_som.html', {'form': form})
+    return render(request, 'myapp/edit_sound.html', {'form': form})
 
 @login_required(login_url='/')
-def excluir_artista(request, pk):
+def delete_artist(request, pk):
     try:
         artista = Artista.objects.get(pk=pk, usuario=request.user)
     except Artista.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Artista não encontrado.'})
+        return render(request, 'myapp/not_found.html', {'mensagem': 'Artista não encontrado.'})
 
     if request.method == 'POST':
         # Remove o arquivo de imagem do servidor se existir
@@ -244,16 +244,16 @@ def excluir_artista(request, pk):
                 os.remove(artista.imagem_perfil.path)
 
         artista.delete()
-        return redirect('painel_geral')
+        return redirect('general_panel')
 
-    return render(request, 'myapp/confirmar_exclusao.html', {'artista': artista})
+    return render(request, 'myapp/confirm_artist_exclusion.html', {'artista': artista})
 
 @login_required(login_url='/')
-def excluir_som(request, pk):
+def delete_sound(request, pk):
     try:
         som = Som.objects.get(pk=pk, usuario=request.user)
     except Som.DoesNotExist:
-        return render(request, 'myapp/registro_nao_encontrado.html', {'mensagem': 'Som não encontrado.'})
+        return render(request, 'myapp/not_found.html', {'mensagem': 'Som não encontrado.'})
 
     if request.method == 'POST':
         # Remove o arquivo de imagem do servidor se existir
@@ -267,9 +267,9 @@ def excluir_som(request, pk):
                 os.remove(som.audio.path)
 
         som.delete()
-        return redirect('painel_geral')
+        return redirect('general_panel')
 
-    return render(request, 'myapp/confirmar_exclusao_som.html', {'som': som})
+    return render(request, 'myapp/confirm_sound_exclusion.html', {'som': som})
 
 def search_results(request):
     query = request.GET.get('q')

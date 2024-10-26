@@ -4,20 +4,20 @@
 {% block content %}
 
     <h2>Meus artistas:</h2>
-    <a href="{% url 'cadastrar_artista' %}" class="button ">Cadastrar Novo Artista</a>
+    <a href="{% url 'add_artist' %}" class="button ">Cadastrar Novo Artista</a>
     <div class="artist-gallery">
         {% for artista in artistas %}
             <div class="artist-item">
-                <a href="{% url 'visualizar_artista' artista.pk %}">
+                <a href="{% url 'artist' artista.pk %}">
                     {% if artista.imagem_perfil %}
                         <img src="{{ artista.imagem_perfil.url }}" alt="{{ artista.nome }}" class="artist-image">
                     {% else %}
                         <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="artist-image">
                     {% endif %}
                 </a>
-                <a href="{% url 'visualizar_artista' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
-                <a href="{% url 'editar_artista' artista.pk %}" class="button secondary-button">Editar</a>
-                <a href="{% url 'excluir_artista' artista.pk %}" class="button danger-button">Excluir</a>
+                <a href="{% url 'artist' artista.pk %}" class="artist-name">{{ artista.nome }}</a>
+                <a href="{% url 'edit_artist' artista.pk %}" class="button secondary-button">Editar</a>
+                <a href="{% url 'delete_artist' artista.pk %}" class="button danger-button">Excluir</a>
             </div>
         {% empty %}
             <p>Nenhum artista encontrado.</p>
@@ -44,20 +44,20 @@
     </div>
 
     <h2>Meus sons:</h2>
-    <a href="{% url 'cadastrar_som' %}" class="button ">Cadastrar Novo Som</a>
+    <a href="{% url 'add_sound' %}" class="button ">Cadastrar Novo Som</a>
     <div class="sound-gallery">
         {% for som in sons %}
             <div class="sound-item">
-                <a href="{% url 'visualizar_som' som.pk %}">
+                <a href="{% url 'sound' som.pk %}">
                     {% if som.imagem_som %}
                         <img src="{{ som.imagem_som.url }}" alt="{{ som.titulo }}" class="sound-image">
                     {% else %}
                         <img src="{% static 'images/somasom_logo_fundolaranja.png' %}" alt="Imagem padrão" class="sound-image">
                     {% endif %}
                 </a>
-                <a href="{% url 'visualizar_som' som.pk %}" class="sound-name">{{ som.titulo }}</a>
-                <a href="{% url 'editar_som' pk=som.pk %}" class="button secondary-button">Editar Som</a>
-                <a href="{% url 'excluir_som' pk=som.pk %}" class="button danger-button">Excluir Som</a>
+                <a href="{% url 'sound' som.pk %}" class="sound-name">{{ som.titulo }}</a>
+                <a href="{% url 'edit_sound' pk=som.pk %}" class="button secondary-button">Editar Som</a>
+                <a href="{% url 'delete_sound' pk=som.pk %}" class="button danger-button">Excluir Som</a>
             </div>
         {% empty %}
             <p>Nenhum som encontrado.</p>

@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="form-container">
-    <h1>Cadastrar Som</h1>
+    <h1>Editar Som</h1>
 
     <form method="post" enctype="multipart/form-data" id="somForm">
         {% csrf_token %}
         {{ form.as_p }}
         <button class="button" type="submit" id="submitBtn">Salvar</button>
     </form>
-    <a class="button" href="/painel_geral">Voltar</a>
+    <a class="button" href="/general_panel">Voltar</a>
     <script>
         document.getElementById('somForm').addEventListener('submit', function() {
             document.getElementById('submitBtn').disabled = true;
