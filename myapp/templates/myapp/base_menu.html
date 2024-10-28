@@ -23,11 +23,18 @@
                 <div></div>
             </div>
             <div class="navbar-menu" id="navbar-menu">
-                <a href="/list_artists">Artistas</a>
-                <a href="/list_sounds">Sons</a>
+                <a href="/artists/list_artists">Artistas</a>
+                <a href="/sounds/list_sounds">Sons</a>
                 {% if user.is_authenticated %}
                     <a href="/general_panel">Painel</a>
-                    <a class="waves-effect waves-light btn" href="{% url 'logout' %}">Sair</a>
+                    <form id="logout-form" method="POST" action="{% url 'logout' %}" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                    <a class="waves-effect waves-light btn" href="#" 
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                       Sair
+                    </a>
+                    
                 {% else %}
                     <a href="/login">Acessar</a>
                     <a href="/signup">Cadastrar</a>

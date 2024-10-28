@@ -10,7 +10,7 @@
             </div>
             <div class="view-artist-details">
                 <h1 class="view-artist-name">{{ som.titulo }}</h1>
-                <p><strong>Artista:</strong> <a href="{% url 'artist' som.artista.pk %}">{{ som.artista.nome }}</a></p>
+                <p><strong>Artista:</strong> <a href="{% url 'artists:artist' som.artista.pk %}">{{ som.artista.nome }}</a></p>
                 <p class="view-artist-description">{{ som.descricao }}</p>
                 {% if som.audio %}
                     <audio controls>
