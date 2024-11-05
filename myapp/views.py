@@ -1,5 +1,6 @@
 from artists.models import Artista
 from sounds.models import Som
+from community.models import Topic
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
@@ -64,7 +65,18 @@ def general_panel(request):
     except EmptyPage:
         sons = paginator_sounds.page(paginator_sounds.num_pages)
 
-    return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons})
+    # Paginação para topicos
+    topic_list = Topic.objects.filter(user=request.user)
+    paginator_topics = Paginator(topic_list, 4)  # Mostra 4 topicos  por página
+    topic_page = request.GET.get('topic_page')
+    try:
+        topics = paginator_topics.page(topic_page)
+    except PageNotAnInteger:
+        topics = paginator_topics.page(1)
+    except EmptyPage:
+        topics = paginator_topics.page(paginator_topics.num_pages)
+
+    return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons,  'topic_list': topics})
 
 
 def signup(request):

@@ -1,0 +1,14 @@
+{% extends "myapp/base_menu.html" %}
+{% load static %}
+
+{% block content %}
+
+    <h1>Excluir topico</h1>
+    <p>Tem certeza que deseja excluir o topico {{ topic.title }}?</p>
+    <p>Ao decidir excluir o topico, todos os posts serão excluídos.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="button" type="submit">Sim, excluir</button>
+    </form>
+    <a class="button" href="/general_panel">Voltar</a>
+{% endblock %}

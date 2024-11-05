@@ -26,6 +26,7 @@
                 <a href="/artists/list_artists">Artistas</a>
                 <a href="/sounds/list_sounds">Sons</a>
                 {% if user.is_authenticated %}
+                    <a href="/community">Comunidade</a>
                     <a href="/general_panel">Painel</a>
                     <form id="logout-form" method="POST" action="{% url 'logout' %}" style="display: none;">
                         {% csrf_token %}
@@ -47,8 +48,11 @@
         </div>
     {% endblock %}
 
-    <div id="content" class="container">
-        {% block content %}{% endblock %}
+    
+    <div id="container_parent" class="container_parent">
+        <div id="content" class="container">
+            {% block content %}{% endblock %}
+        </div>
     </div>
 
     <div class="footer">

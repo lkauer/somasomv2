@@ -14,4 +14,5 @@ urlpatterns = [
     path('', include('myapp.urls'), name='index'),  # Redireciona para o índice principal
     path('login/', auth_views.LoginView.as_view(template_name='myapp/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('community/', include('community.urls', namespace='community')),  # Rotas do app de community
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
