@@ -83,4 +83,42 @@
         </span>
     </div>
 
+    <h2>Meus Topicos</h2>
+    <a href="{% url 'community:add_topic' %}" class="button ">Cadastrar novo topico</a>
+    <div class="">
+        {% for topic in topic_list %}
+            <a href="{% url 'community:topic' topic.pk %}" >
+                <div style="border: 2px solid black;" class="view-artist-details">
+                    <p class="view-artist-description"> <b>Titulo</b>: {{ topic.title }}</p>
+                    <p class="view-artist-description"> <b>Descrição</b>: {{ topic.description }}</p>
+                    <p><b>Criado por </b>: {{ topic.user }}</p>
+                    <a href="{% url 'community:edit_topic' pk=topic.pk %}" class="button secondary-button">Editar topico</a>
+                    <a href="{% url 'community:delete_topic' pk=topic.pk %}" class="button danger-button">Excluir topico</a>
+                </div>
+            </a>
+            <br>
+        {% empty %}
+            <p>Nenhum topico encontrado.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Navegação de paginação para topicos -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if topic_list.has_previous %}
+                <a href="?topic_page=1&topic_page={{ artistas.number }}" class="button pagination-button">&laquo; primeira</a>
+                <a href="?topic_page={{ topic_list.previous_page_number }}&topic_page={{ artistas.number }}" class="button pagination-button">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ topic_list.number }} de {{ topic_list.paginator.num_pages }}.
+            </span>
+
+            {% if topic_list.has_next %}
+                <a href="?topic_page={{ topic_list.next_page_number }}&topic_page={{ artistas.number }}" class="button pagination-button">próxima</a>
+                <a href="?topic_page={{ topic_list.paginator.num_pages }}&topic_page={{ artistas.number }}" class="button pagination-button">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
 {% endblock %}

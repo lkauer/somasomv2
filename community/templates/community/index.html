@@ -1,0 +1,41 @@
+{% extends "myapp/base_menu.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Topicos gerais</h1>
+    <div class="">
+        {% for topic in topic_list %}
+            <a href="{% url 'community:topic' topic.pk %}" >
+                <div style="border: 2px solid black;" class="view-artist-details">
+                    <p class="view-artist-description"> <b>Titulo</b>: {{ topic.title }}</p>
+                    <p class="view-artist-description"> <b>Descrição</b>: {{ topic.description }}</p>
+                    <p><b>Criado por </b>: {{ topic.user }}</p>
+                    <p><b>Criado em </b>: {{ topic.created_at|date:"d M Y H:i" }}</p>
+                </div>
+            </a>
+            <br>
+        {% empty %}
+            <p>Nenhum topico encontrado.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Navegação de paginação -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if events.has_previous %}
+                <a href="?page=1">&laquo; primeira</a>
+                <a href="?page={{ events.previous_page_number }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ events.number }} de {{ events.paginator.num_pages }}.
+            </span>
+
+            {% if events.has_next %}
+                <a href="?page={{ events.next_page_number }}">próxima</a>
+                <a href="?page={{ events.paginator.num_pages }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+{% endblock %}

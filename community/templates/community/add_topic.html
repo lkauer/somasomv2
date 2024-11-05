@@ -1,0 +1,18 @@
+{% extends "myapp/base_menu.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Criar topico</h1>
+    <form method="post" enctype="multipart/form-data" id="topicForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button " type="submit" id="submitBtn">Salvar</button>
+    </form>
+    <a class="button " href="/community">Voltar</a>
+    <script>
+        document.getElementById('topicForm').addEventListener('submit', function() {
+            document.getElementById('submitBtn').disabled = true;
+        });
+    </script>
+</div>
+{% endblock %}
