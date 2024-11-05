@@ -76,7 +76,7 @@ def general_panel(request):
     except EmptyPage:
         topics = paginator_topics.page(paginator_topics.num_pages)
 
-    return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons,  'topic_list': topics})
+    return render(request, 'myapp/painel.html', {'artistas': artistas, 'sons': sons,  'topics': topics})
 
 
 def signup(request):
