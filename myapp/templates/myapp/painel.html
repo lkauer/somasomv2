@@ -28,8 +28,8 @@
     <div class="pagination">
         <span class="step-links">
             {% if artistas.has_previous %}
-                <a href="?artista_page=1&som_page={{ sons.number }}" class="button pagination-button">&laquo; primeira</a>
-                <a href="?artista_page={{ artistas.previous_page_number }}&som_page={{ sons.number }}" class="button pagination-button">anterior</a>
+                <a href="?artista_page=1" class="button pagination-button">&laquo; primeira</a>
+                <a href="?artista_page={{ artistas.previous_page_number }}" class="button pagination-button">anterior</a>
             {% endif %}
 
             <span class="current">
@@ -37,8 +37,8 @@
             </span>
 
             {% if artistas.has_next %}
-                <a href="?artista_page={{ artistas.next_page_number }}&som_page={{ sons.number }}" class="button pagination-button">próxima</a>
-                <a href="?artista_page={{ artistas.paginator.num_pages }}&som_page={{ sons.number }}" class="button pagination-button">última &raquo;</a>
+                <a href="?artista_page={{ artistas.next_page_number }}" class="button pagination-button">próxima</a>
+                <a href="?artista_page={{ artistas.paginator.num_pages }}" class="button pagination-button">última &raquo;</a>
             {% endif %}
         </span>
     </div>
@@ -68,8 +68,8 @@
     <div class="pagination">
         <span class="step-links">
             {% if sons.has_previous %}
-                <a href="?som_page=1&artista_page={{ artistas.number }}" class="button pagination-button">&laquo; primeira</a>
-                <a href="?som_page={{ sons.previous_page_number }}&artista_page={{ artistas.number }}" class="button pagination-button">anterior</a>
+                <a href="?som_page=1" class="button pagination-button">&laquo; primeira</a>
+                <a href="?som_page={{ sons.previous_page_number }}" class="button pagination-button">anterior</a>
             {% endif %}
 
             <span class="current">
@@ -77,46 +77,46 @@
             </span>
 
             {% if sons.has_next %}
-                <a href="?som_page={{ sons.next_page_number }}&artista_page={{ artistas.number }}" class="button pagination-button">próxima</a>
-                <a href="?som_page={{ sons.paginator.num_pages }}&artista_page={{ artistas.number }}" class="button pagination-button">última &raquo;</a>
+                <a href="?som_page={{ sons.next_page_number }}" class="button pagination-button">próxima</a>
+                <a href="?som_page={{ sons.paginator.num_pages }}" class="button pagination-button">última &raquo;</a>
             {% endif %}
         </span>
     </div>
 
-    <h2>Meus Topicos</h2>
-    <a href="{% url 'community:add_topic' %}" class="button ">Cadastrar novo topico</a>
-    <div class="">
-        {% for topic in topic_list %}
-            <a href="{% url 'community:topic' topic.pk %}" >
+    <h2>Meus Tópicos</h2>
+    <a href="{% url 'community:add_topic' %}" class="button ">Cadastrar novo tópico</a>
+    <div>
+        {% for topic in topics %}
+            <a href="{% url 'community:topic' topic.pk %}">
                 <div style="border: 2px solid black;" class="view-artist-details">
-                    <p class="view-artist-description"> <b>Titulo</b>: {{ topic.title }}</p>
-                    <p class="view-artist-description"> <b>Descrição</b>: {{ topic.description }}</p>
-                    <p><b>Criado por </b>: {{ topic.user }}</p>
-                    <a href="{% url 'community:edit_topic' pk=topic.pk %}" class="button secondary-button">Editar topico</a>
-                    <a href="{% url 'community:delete_topic' pk=topic.pk %}" class="button danger-button">Excluir topico</a>
+                    <p class="view-artist-description"><b>Título</b>: {{ topic.title }}</p>
+                    <p class="view-artist-description"><b>Descrição</b>: {{ topic.description }}</p>
+                    <p><b>Criado por</b>: {{ topic.user }}</p>
+                    <a href="{% url 'community:edit_topic' pk=topic.pk %}" class="button secondary-button">Editar tópico</a>
+                    <a href="{% url 'community:delete_topic' pk=topic.pk %}" class="button danger-button">Excluir tópico</a>
                 </div>
             </a>
             <br>
         {% empty %}
-            <p>Nenhum topico encontrado.</p>
+            <p>Nenhum tópico encontrado.</p>
         {% endfor %}
     </div>
 
-    <!-- Navegação de paginação para topicos -->
+    <!-- Navegação de paginação para tópicos -->
     <div class="pagination">
         <span class="step-links">
-            {% if topic_list.has_previous %}
-                <a href="?topic_page=1&topic_page={{ artistas.number }}" class="button pagination-button">&laquo; primeira</a>
-                <a href="?topic_page={{ topic_list.previous_page_number }}&topic_page={{ artistas.number }}" class="button pagination-button">anterior</a>
+            {% if topics.has_previous %}
+                <a href="?topic_page=1" class="button pagination-button">&laquo; primeira</a>
+                <a href="?topic_page={{ topics.previous_page_number }}" class="button pagination-button">anterior</a>
             {% endif %}
 
             <span class="current">
-                Página {{ topic_list.number }} de {{ topic_list.paginator.num_pages }}.
+                Página {{ topics.number }} de {{ topics.paginator.num_pages }}.
             </span>
 
-            {% if topic_list.has_next %}
-                <a href="?topic_page={{ topic_list.next_page_number }}&topic_page={{ artistas.number }}" class="button pagination-button">próxima</a>
-                <a href="?topic_page={{ topic_list.paginator.num_pages }}&topic_page={{ artistas.number }}" class="button pagination-button">última &raquo;</a>
+            {% if topics.has_next %}
+                <a href="?topic_page={{ topics.next_page_number }}" class="button pagination-button">próxima</a>
+                <a href="?topic_page={{ topics.paginator.num_pages }}" class="button pagination-button">última &raquo;</a>
             {% endif %}
         </span>
     </div>

@@ -10,19 +10,19 @@ from django.contrib import messages
 def index(request):
     
     topic_list = Topic.objects.all()
-    paginator_topic = Paginator(topic_list, 8)  # Mostra 8 sons por página
+    paginator = Paginator(topic_list, 8)  # Mostra 8 sons por página
 
     page = request.GET.get('page')
     try:
-        topic_list = paginator_topic.page(page)
+        topics = paginator.page(page)
     except PageNotAnInteger:
         # Se a página não for um inteiro, mostra a primeira página
-        topic_list = paginator_topic.page(1)
+        topics = paginator.page(1)
     except EmptyPage:
         # Se a página estiver fora do intervalo, mostra a última página
-        topic_list = paginator_topic.page(paginator_topic.num_pages)
+        topics = paginator.page(paginator.num_pages)
 
-    return render(request, 'community/index.html', {'topic_list': topic_list})
+    return render(request, 'community/index.html', {'topics': topics})
 
 @login_required(login_url='/')
 def add_topic(request):

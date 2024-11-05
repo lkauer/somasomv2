@@ -4,7 +4,7 @@
 {% block content %}
     <h1>Topicos gerais</h1>
     <div class="">
-        {% for topic in topic_list %}
+        {% for topic in topics %}
             <a href="{% url 'community:topic' topic.pk %}" >
                 <div style="border: 2px solid black;" class="view-artist-details">
                     <p class="view-artist-description"> <b>Titulo</b>: {{ topic.title }}</p>
@@ -22,18 +22,18 @@
     <!-- Navegação de paginação -->
     <div class="pagination">
         <span class="step-links">
-            {% if events.has_previous %}
+            {% if topics.has_previous %}
                 <a href="?page=1">&laquo; primeira</a>
-                <a href="?page={{ events.previous_page_number }}">anterior</a>
+                <a href="?page={{ topics.previous_page_number }}">anterior</a>
             {% endif %}
 
             <span class="current">
-                Página {{ events.number }} de {{ events.paginator.num_pages }}.
+                Página {{ topics.number }} de {{ topics.paginator.num_pages }}.
             </span>
 
-            {% if events.has_next %}
-                <a href="?page={{ events.next_page_number }}">próxima</a>
-                <a href="?page={{ events.paginator.num_pages }}">última &raquo;</a>
+            {% if topics.has_next %}
+                <a href="?page={{ topics.next_page_number }}">próxima</a>
+                <a href="?page={{ topics.paginator.num_pages }}">última &raquo;</a>
             {% endif %}
         </span>
     </div>
